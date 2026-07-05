@@ -54,7 +54,11 @@ and no git.
   to hold, and which stays necessary even in projects with full Git, CI,
   and test access.
 
-![Deterministic Context Routing flow: User Request to Module Concept to Memory Layers to Evidence with confidence labels](assets/context-routing-diagram.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/context-routing-diagram-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/context-routing-diagram-light.svg">
+  <img alt="Deterministic Context Routing, three connected panels: Deterministic Routing (User Task Intake resolved through the Module Registry in modules.md to a Module Concept Page); Layered Memory System (Short Memory in session_state.md, Medium Memory in docs/, Long Memory holding Tables as Contracts, Class Contracts, and Usage Flows and Patterns, and Source Evidence moving Raw to Curated to Processed); Agent Engine and Gates (Superpowers workflow integration, a Bounded Active Context, a Confidence Matrix of confirmed, inferred, runtime-unverified, and blocked-by-access, and Static Verification Gates); a Continuous Documentation Sync loop feeds discoveries from the Agent Engine back into routing and memory" src="assets/context-routing-diagram-light.svg">
+</picture>
 
 ## Why ERP
 

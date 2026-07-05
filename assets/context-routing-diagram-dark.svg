@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 640" width="100%" height="100%">
+  <style>
+    .bg { fill: #0B0F19; }
+    .title { font-family: 'system-ui', -apple-system, sans-serif; font-weight: 800; font-size: 24px; fill: #F9FAFB; letter-spacing: 1px; }
+    .subtitle { font-family: 'system-ui', -apple-system, sans-serif; font-weight: 400; font-size: 13px; fill: #9CA3AF; }
+    .section-title { font-family: 'system-ui', -apple-system, sans-serif; font-weight: 700; font-size: 15px; fill: #38BDF8; letter-spacing: 0.5px; }
+    
+    .node-bg { fill: #1F2937; stroke: #374151; stroke-width: 1.5; rx: 8px; }
+    .node-bg-active { fill: #111827; stroke: #38BDF8; stroke-width: 2; rx: 8px; filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.2)); }
+    .node-bg-accent { fill: #1F2937; stroke: #F59E0B; stroke-width: 1.5; rx: 8px; }
+    .node-bg-green { fill: #1F2937; stroke: #34D399; stroke-width: 1.5; rx: 8px; }
+    
+    .text-main { font-family: 'system-ui', -apple-system, sans-serif; font-weight: 600; font-size: 13px; fill: #F3F4F6; }
+    .text-muted { font-family: 'system-ui', -apple-system, sans-serif; font-weight: 400; font-size: 11px; fill: #9CA3AF; }
+    .text-code { font-family: 'SFMono-Regular', Consolas, Monaco, monospace; font-size: 11px; fill: #F59E0B; font-weight: bold; }
+    
+    .arrow { stroke: #4B5563; stroke-width: 2; fill: none; stroke-dasharray: 4 4; animation: dash 30s linear infinite; }
+    .arrow-solid { stroke: #38BDF8; stroke-width: 2; fill: none; }
+    .arrow-success { stroke: #34D399; stroke-width: 2; fill: none; }
+    .arrow-marker { fill: #4B5563; }
+    .arrow-marker-solid { fill: #38BDF8; }
+    .arrow-marker-success { fill: #34D399; }
+    
+    .badge { font-family: 'system-ui', -apple-system, sans-serif; font-weight: 700; font-size: 10px; fill: #0B0F19; }
+
+    @keyframes dash {
+      to { stroke-dashoffset: -16; }
+    }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" class="arrow-marker" />
+    </marker>
+    <marker id="arrowhead-solid" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" class="arrow-marker-solid" />
+    </marker>
+    <marker id="arrowhead-success" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" class="arrow-marker-success" />
+    </marker>
+    
+    <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="640" class="bg" />
+  
+  <g opacity="0.03" stroke="#FFFFFF" stroke-width="1">
+    <path d="M 0,40 L 1024,40 M 0,80 L 1024,80 M 0,120 L 1024,120 M 0,160 L 1024,160 M 0,200 L 1024,200 M 0,240 L 1024,240 M 0,280 L 1024,280 M 0,320 L 1024,320 M 0,360 L 1024,360 M 0,400 L 1024,400 M 0,440 L 1024,440 M 0,480 L 1024,480 M 0,520 L 1024,520 M 0,560 L 1024,560 M 0,600 L 1024,600" />
+    <path d="M 40,0 L 40,640 M 80,0 L 80,640 M 120,0 L 120,640 M 160,0 L 160,640 M 200,0 L 200,640 M 240,0 L 240,640 M 280,0 L 280,640 M 320,0 L 320,640 M 360,0 L 360,640 M 400,0 L 400,640 M 440,0 L 440,640 M 480,0 L 480,640 M 520,0 L 520,640 M 560,0 L 560,640 M 600,0 L 600,640 M 640,0 L 640,640 M 680,0 L 680,640 M 720,0 L 720,640 M 760,0 L 760,640 M 800,0 L 800,640 M 840,0 L 840,640 M 880,0 L 880,640 M 920,0 L 920,640 M 960,0 L 960,640" />
+  </g>
+
+  <g transform="translate(40, 45)">
+    <text x="0" y="0" class="title">DETERMINISTIC CONTEXT ROUTING</text>
+    <text x="0" y="22" class="subtitle">Necessary-and-Sufficient Context, Layered Memory &amp; Verification Gates for Agentic ERP Work</text>
+  </g>
+
+  <g transform="translate(40, 110)">
+    <rect width="260" height="490" fill="url(#blue-grad)" stroke="#1E3A8A" stroke-width="1" rx="12" />
+    <text x="20" y="30" class="section-title">1. DETERMINISTIC ROUTING</text>
+    
+    <g transform="translate(20, 50)">
+      <rect width="220" height="70" class="node-bg" />
+      <text x="15" y="25" class="text-main">User Task Intake</text>
+      <text x="15" y="43" class="text-muted">Natural Language Request</text>
+      <text x="15" y="58" class="text-muted">e.g., Domain vocabulary &amp; intents</text>
+    </g>
+
+    <g transform="translate(20, 150)">
+      <rect width="220" height="70" class="node-bg-active" />
+      <text x="15" y="25" class="text-main">Module Registry</text>
+      <text x="15" y="43" class="text-code">modules.md</text>
+      <text x="15" y="58" class="text-muted">Resolves aliases to static paths</text>
+    </g>
+
+    <g transform="translate(20, 250)">
+      <rect width="220" height="95" class="node-bg-active" />
+      <text x="15" y="22" class="text-main">Semantic Bridge</text>
+      <text x="15" y="40" class="text-code">Module Concept Page</text>
+      <text x="15" y="58" class="text-muted">• Maps intent to technical objects</text>
+      <text x="15" y="72" class="text-muted">• Invariants &amp; Boundaries definition</text>
+      <text x="15" y="86" class="text-muted">• Domain Terminology Dictionary</text>
+    </g>
+    
+    <g transform="translate(20, 375)">
+      <rect width="220" height="90" fill="#111827" stroke="#374151" stroke-width="1" rx="6" />
+      <text x="12" y="20" class="text-muted" font-weight="bold">Routing Philosophy:</text>
+      <text x="12" y="38" class="text-muted">Avoid broad RAG text searches.</text>
+      <text x="12" y="54" class="text-muted">Force agent to navigate via narrow</text>
+      <text x="12" y="70" class="text-muted">deterministic file chains.</text>
+    </g>
+  </g>
+
+  <path d="M 170,230 L 170,260" class="arrow-solid" marker-end="url(#arrowhead-solid)" />
+  <path d="M 170,330 L 170,360" class="arrow-solid" marker-end="url(#arrowhead-solid)" />
+  <path d="M 300,405 L 380,405" class="arrow-solid" marker-end="url(#arrowhead-solid)" />
+  <path d="M 300,215 L 380,215" class="arrow-solid" marker-end="url(#arrowhead-solid)" />
+
+  <g transform="translate(340, 110)">
+    <rect width="340" height="490" fill="url(#blue-grad)" stroke="#1E3A8A" stroke-width="1" rx="12" />
+    <text x="20" y="30" class="section-title">2. LAYERED MEMORY SYSTEM (KB)</text>
+
+    <g transform="translate(20, 50)">
+      <rect width="300" height="85" class="node-bg-accent" />
+      <text x="15" y="22" class="text-main">Short Memory (Restart State)</text>
+      <text x="15" y="40" class="text-code">session_state.md</text>
+      <text x="15" y="58" class="text-muted">Compact task logging &amp; active indices</text>
+      <rect x="15" y="66" width="185" height="14" fill="#F59E0B" rx="3" />
+      <text x="20" y="77" class="badge">&lt;!-- AGENT-SESSION-STOP --&gt;</text>
+      <text x="205" y="77" class="text-muted" font-size="10px">Stop Marker</text>
+    </g>
+
+    <g transform="translate(20, 150)">
+      <rect width="300" height="55" class="node-bg" />
+      <text x="15" y="22" class="text-main">Medium Memory (Task Context)</text>
+      <text x="15" y="42" class="text-muted">docs/ • Design Docs &amp; Implementation Plans</text>
+    </g>
+
+    <g transform="translate(20, 220)">
+      <rect width="300" height="150" class="node-bg-green" />
+      <text x="15" y="22" class="text-main" style="fill: #34D399;">Long Memory (Durable Knowledge)</text>
+      
+      <g transform="translate(15, 35)">
+        <rect width="270" height="30" fill="#111827" stroke="#34D399" stroke-opacity="0.4" rx="4" />
+        <text x="10" y="19" class="text-main" font-size="11px">Tables as Contracts <tspan class="text-muted">(Semantics vs Raw Schema)</tspan></text>
+      </g>
+      <g transform="translate(15, 72)">
+        <rect width="270" height="30" fill="#111827" stroke="#34D399" stroke-opacity="0.4" rx="4" />
+        <text x="10" y="19" class="text-main" font-size="11px">Class Contracts <tspan class="text-muted">(APIs, Side Effects, Limits)</tspan></text>
+      </g>
+      <g transform="translate(15, 109)">
+        <rect width="270" height="30" fill="#111827" stroke="#34D399" stroke-opacity="0.4" rx="4" />
+        <text x="10" y="19" class="text-main" font-size="11px">Usage Flows &amp; Patterns <tspan class="text-muted">(Cross-Object Scenarios)</tspan></text>
+      </g>
+    </g>
+
+    <g transform="translate(20, 385)">
+      <rect width="300" height="85" class="node-bg" />
+      <text x="15" y="22" class="text-main">Source Evidence (Auditable trail)</text>
+      <text x="15" y="42" class="text-muted">source-artifacts/ • INDEX.md Ledger</text>
+      <text x="15" y="60" class="text-muted">Strict Workflow:</text>
+      <rect x="110" y="50" width="45" height="14" fill="#374151" rx="3" /><text x="120" y="61" class="text-muted" font-size="10px">Raw</text>
+      <text x="160" y="61" class="text-main">→</text>
+      <rect x="175" y="50" width="55" height="14" fill="#1E3A8A" rx="3" /><text x="182" y="61" class="text-muted" font-size="10px" style="fill:#38BDF8;">Curated</text>
+      <text x="235" y="61" class="text-main">→</text>
+      <rect x="250" y="50" width="43" height="14" fill="#065F46" rx="3" /><text x="254" y="61" class="text-muted" font-size="10px" style="fill:#34D399;">Processed</text>
+    </g>
+  </g>
+
+  <path d="M 680,205 L 740,205" class="arrow-solid" marker-end="url(#arrowhead-solid)" />
+  <path d="M 680,335 L 740,335" class="arrow-solid" marker-end="url(#arrowhead-solid)" />
+
+  <path d="M 660,430 C 690,430 690,120 660,120" class="arrow" marker-end="url(#arrowhead)" />
+  <text x="680" y="270" class="text-muted" font-size="10px" transform="rotate(90, 680, 270)">Curator Refresh Loop</text>
+
+  <g transform="translate(720, 110)">
+    <rect width="260" height="490" fill="url(#blue-grad)" stroke="#1E3A8A" stroke-width="1" rx="12" />
+    <text x="20" y="30" class="section-title">3. AGENT ENGINE &amp; GATES</text>
+
+    <g transform="translate(20, 50)">
+      <rect width="220" height="75" class="node-bg-active" />
+      <text x="15" y="22" class="text-main">Workflow Framework</text>
+      <text x="15" y="40" class="text-muted">Integration with </text>
+      <text x="110" y="40" class="text-main" style="fill:#38BDF8;">Superpowers</text>
+      <text x="15" y="58" class="text-muted">Intake → Design → Plan → Dev</text>
+    </g>
+
+    <g transform="translate(20, 145)">
+      <rect width="220" height="75" fill="#111827" stroke="#F59E0B" stroke-width="1.5" rx="8" />
+      <text x="15" y="22" class="text-main" style="fill:#F59E0B;">Bounded Active Context</text>
+      <text x="15" y="42" class="text-muted">Necessary &amp; Sufficient Context ONLY</text>
+      <text x="15" y="58" class="text-muted">Prevents token flooding &amp; noise</text>
+    </g>
+
+    <g transform="translate(20, 240)">
+      <rect width="220" height="225" class="node-bg" />
+      <text x="15" y="25" class="text-main">Confidence Matrix</text>
+      <text x="15" y="43" class="text-muted">Explicit Uncertainty Tracking</text>
+      
+      <g transform="translate(15, 60)">
+        <rect width="80" height="18" fill="#045F46" rx="3" /><text x="23" y="13" class="badge" style="fill:#34D399;">confirmed</text>
+        <rect x="90" y="0" width="80" height="18" fill="#78350F" rx="3" /><text x="105" y="13" class="badge" style="fill:#F59E0B;">inferred</text>
+
+        <rect y="28" width="110" height="18" fill="#7C2D12" rx="3" /><text x="8" y="41" class="badge" style="fill:#F97316;">runtime-unverified</text>
+        <rect x="0" y="56" width="110" height="18" fill="#991B1B" rx="3" /><text x="8" y="69" class="badge" style="fill:#F87171;">blocked-by-access</text>
+      </g>
+      
+      <text x="15" y="160" class="text-main" font-size="12px">Static Verification Gates</text>
+      <text x="15" y="180" class="text-muted">• Encoding Scans (Cyrillic safe)</text>
+      <text x="15" y="196" class="text-muted">• Runtime Assumption Logging</text>
+      <text x="15" y="212" class="text-muted">• Compensate absent compilers</text>
+    </g>
+  </g>
+
+  <path d="M 850,110 C 850,100 510,100 510,110" class="arrow-success" stroke-width="2" marker-end="url(#arrowhead-success)" />
+  <text x="680" y="88" class="text-main" style="fill:#34D399;" font-size="11px" text-anchor="middle">Continuous Documentation Sync (KB Curator Loop)</text>
+</svg>
