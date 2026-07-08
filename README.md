@@ -138,11 +138,12 @@ layer, including LangChain, or into no framework at all.
 - Validated on a large proprietary ERP platform in production use, where
   full source access, compiler/build tooling, and runtime checks were not
   available for most of the work.
-- Self-tested on a second agent framework: the same three mechanisms —
-  routing, confidence labels, session state — were re-tested by this
-  project's author on [Hermes Agent](https://github.com/NousResearch/hermes-agent),
-  a different agent product, on a non-ERP workspace. Self-run, not a Nous
-  Research endorsement — see
+- Self-tested on a second agent framework: the same graph-of-curated-pages
+  structure — routing, confidence labels, session state, and the curation
+  that builds the graph's edges — was re-tested by this project's author on
+  [Hermes Agent](https://github.com/NousResearch/hermes-agent), a different
+  agent product, on a non-ERP workspace. Self-run, not a Nous Research
+  endorsement — see
   `Evidence/01-hermes-agent-cross-framework-validation.md`.
 
 ## Grounded In
