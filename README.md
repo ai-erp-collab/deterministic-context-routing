@@ -4,6 +4,8 @@
 ![Status: v0.1.0-draft](https://img.shields.io/badge/status-v0.1.0--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
+🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
+
 > Documentation is routing infrastructure, not cleanup prose.
 
 A methodology for giving AI agents necessary-and-sufficient context in any
@@ -136,6 +138,12 @@ layer, including LangChain, or into no framework at all.
 - Validated on a large proprietary ERP platform in production use, where
   full source access, compiler/build tooling, and runtime checks were not
   available for most of the work.
+- Self-tested on a second agent framework: the same three mechanisms —
+  routing, confidence labels, session state — were re-tested by this
+  project's author on [Hermes Agent](https://github.com/NousResearch/hermes-agent),
+  a different agent product, on a non-ERP workspace. Self-run, not a Nous
+  Research endorsement — see
+  `Evidence/01-hermes-agent-cross-framework-validation.md`.
 
 ## Grounded In
 
@@ -164,9 +172,11 @@ up in independent research and industry material:
    ([arXiv:2601.15188 — Benchmarking Large Language Models for ABAP Code
    Generation](https://arxiv.org/abs/2601.15188))
 
-These sources back the *problem statement*. The methodology itself hasn't
-been independently evaluated by a third party — see "In Good Company"
-above for what has actually been validated in practice.
+These sources back the *problem statement*. The methodology's mechanisms
+have also been self-tested once, by this project's own author, on a
+second agent framework and a non-ERP domain (see "In Good Company" above
+and `Evidence/`) — that is a case study, not an independent third-party
+audit or a peer-reviewed result.
 
 ## License
 
