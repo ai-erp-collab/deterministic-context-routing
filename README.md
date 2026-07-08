@@ -48,6 +48,10 @@ and no git.
 - **Deterministic Context Routing** — a fixed path from a request to
   exactly the context it needs: module registry -> module concept ->
   wiki/contracts -> artifact index -> session state.
+- **Curated Knowledge Base** — raw evidence (table exports, source
+  examples, runtime observations) is turned into compact, cross-referenced
+  pages before an agent needs them, so routing has something correct and
+  current to find instead of a source dump to search.
 - **Confidence Labels** — every important claim is tagged `confirmed`,
   `inferred`, `runtime-unverified`, or `blocked-by-access`, so agents and
   humans both know what has actually been checked.
