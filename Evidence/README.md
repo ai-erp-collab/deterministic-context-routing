@@ -21,4 +21,4 @@ methodology text.
 
 | Document | What it tests | Status |
 | --- | --- | --- |
-| `01-hermes-agent-cross-framework-validation.md` | Context routing, curation, confidence labels, session state — re-tested on a second agent product (Hermes Agent, Nous Research) in a non-ERP domain | self-run case study |
+| `01-hermes-agent-cross-framework-validation.md` | Context routing, curation, confidence labels, session state, and the boundary of the routing advantage on open-ended research — re-tested on a second agent product (Hermes Agent, Nous Research) in a non-ERP domain | self-run case study |
