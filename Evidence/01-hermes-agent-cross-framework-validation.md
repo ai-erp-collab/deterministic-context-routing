@@ -208,10 +208,10 @@ pure overhead — on queries that have no local artifact to route to.
 
 **Method:** four follow-up rounds, run after Tests 1–3, against two
 additional real workspaces set up the same way as Workspace A/B —
-**Workspace C**, a product-engineering project with an internal knowledge
-base of architecture and design-decision pages, and **Workspace D**, a
-brand/content-strategy project with concept, research, and planning pages
-— plus the methodology's own treatise. All four rounds used the same
+**Workspace C**, a working project with an internal knowledge base of
+architecture and design-decision pages, and **Workspace D**, a working
+project with concept, research, and planning pages — plus the
+methodology's own treatise. All four rounds used the same
 backend model, `deepseek-v4-flash:cloud`, through Hermes Agent, and were
 measured via the agent's own verbose logging — prompt-token totals from
 its per-request usage summary, and `read_file` / `search_files` /
