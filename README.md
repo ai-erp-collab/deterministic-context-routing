@@ -105,6 +105,10 @@ not because the method only works there.
 5. Run one real task from that context, then update `session_state.md`
    before you stop.
 
+Prefer to delegate? Hand `Templates/project-workspace/ASSEMBLY.md` to
+your coding agent — it runs these steps phase by phase, checkpoints its
+progress in `session_state.md`, and asks you only for the decisions.
+
 For the full walkthrough, see
 `Methodology/sections/10-practical-workspace-template.md`.
 

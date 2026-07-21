@@ -6,6 +6,8 @@
 - If no module is explicitly requested, continue with the last active module named in root `session_state.md`.
 - Read the active module `AGENTS.md` before non-trivial work.
 - Read only the latest entry in the active module `session_state.md`: stop at the first line that exactly equals `<!-- AGENT-SESSION-STOP -->`.
+- Answer questions about the project from the curated knowledge base first: resolve the module, read `knowledge-base/modules/<module>/INDEX.md`, then the relevant concept, contract, or table pages — before re-reading raw sources or code.
+- Descend to raw sources or code only when the knowledge base lacks the needed fact; after answering, record the recovered fact in the knowledge base.
 - Keep module-specific durable knowledge in `knowledge-base/modules/<module>`.
 - Keep reusable platform or cross-module knowledge in `knowledge-base/shared`.
 - Keep raw source artifacts separate from curated knowledge.

@@ -22,3 +22,4 @@ methodology text.
 | Document | What it tests | Status |
 | --- | --- | --- |
 | `01-hermes-agent-cross-framework-validation.md` | Context routing, curation, confidence labels, session state, and the boundary of the routing advantage on open-ended research — re-tested on a second agent product (Hermes Agent, Nous Research) in a non-ERP domain | self-run case study |
+| `02-context-mechanism-vs-flat-memory-pattern.md` | Completeness, navigation discipline (overread, re-discovery), and cost — Deterministic Context Routing vs. the Cline Memory Bank pattern on three real services, same model, plus a scaling projection to a larger reference project | self-run case study |

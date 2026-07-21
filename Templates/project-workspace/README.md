@@ -8,6 +8,7 @@ values. Keep project-specific rules in clearly marked sections.
 
 ## Contents
 
+- `ASSEMBLY.md`: agent-executable assembly guide — hand it to your agent to build the workspace; deletable after assembly.
 - `AGENTS.md`: root workspace rules.
 - `idea.md`: one-time project-level bootstrap input.
 - `known_issues.md`: recurring workspace problems and required handling.
@@ -23,13 +24,9 @@ values. Keep project-specific rules in clearly marked sections.
 - `templates/workflow/`: design and implementation-plan templates.
 - `templates/session/`: session-state entry template.
 
-## First Adaptation Pass
+## Adapting the Template
 
-1. Fill root `idea.md` with the project purpose, scope, first modules, and open questions, then use it to create durable starter artifacts.
-2. Rename `modules/example-module/` and `knowledge-base/modules/example-module/`.
-3. Fill the module `idea.md` with the module purpose, users, capabilities, boundaries, and first requests, then turn it into a module concept.
-4. Register the real module in `modules.md`.
-5. Replace project-specific examples in `AGENTS.md` and `known_issues.md`, including the capability profile for Git, compiler/build, tests, runtime access, and static checks.
-6. Write the first module concept from `templates/wiki/module-concept-page.md`.
-7. Add one real artifact to `source-artifacts/tables/raw/`.
-8. Curate one table, contract, or usage page before moving that artifact to processed.
+Hand `ASSEMBLY.md` to your agent — it runs the adaptation phase by
+phase and asks you only for the decisions (capability profile, project
+idea confirmation, module boundaries). To adapt by hand instead, follow
+`Methodology/sections/10-practical-workspace-template.md`.

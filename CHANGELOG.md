@@ -7,6 +7,39 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.3.0-draft] - 2026-07-21
+
+### Added
+
+- `Evidence/02-context-mechanism-vs-flat-memory-pattern.md`: a self-run
+  comparison of Deterministic Context Routing against the Cline Memory Bank
+  pattern (a flat, always-loaded memory set) on three real services, same
+  model — completeness, navigation discipline (overread, re-discovery), and
+  cost, plus a scaling projection to a larger reference project.
+- `Templates/project-workspace/ASSEMBLY.md`: an agent-executable assembly
+  guide — hand it to a coding agent to adapt the starter workspace phase by
+  phase, checkpointing progress in `session_state.md` and asking the user
+  only for the decisions that need one (capability profile, project idea
+  confirmation, module boundaries).
+- `Templates/project-workspace/AGENTS.md`: a knowledge-base-first retrieval
+  rule — resolve the module and read its knowledge-base pages before
+  re-reading raw sources or code, then record any recovered fact back into
+  the knowledge base.
+
+### Changed
+
+- `README.md`: Quickstart now offers delegating to `ASSEMBLY.md` as an
+  alternative to the manual steps.
+- `Templates/project-workspace/README.md`: "First Adaptation Pass" reworked
+  as "Adapting the Template," offering the `ASSEMBLY.md` guide as the
+  primary path.
+
+### Fixed
+
+- `uk/README.md`: the "Curated Knowledge Base" pillar (added to the
+  English README's Solution section in 0.2.0-draft) was missing from the
+  Ukrainian translation — added.
+
 ## [0.2.0-draft] - 2026-07-08
 
 ### Added
