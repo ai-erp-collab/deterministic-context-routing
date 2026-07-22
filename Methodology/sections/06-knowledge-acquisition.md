@@ -153,8 +153,8 @@ The durable output might be a refreshed usage page for budget access, a table no
 ## Related Notes
 
 - `01-why-this-method-exists.md`: explains why proprietary ERP work is a context-management problem.
-- `02-knowledge-system.md`: defines memory layers and source evidence.
-- `04-module-concept-and-language.md`: defines the business-language entry point for acquisition.
-- `06-tables-as-contracts.md`: downstream section for converting table evidence into durable contracts.
-- `07-libraries-and-class-contracts.md`: downstream section for documenting public behavior from source evidence.
+- `03-knowledge-system.md`: defines memory layers and source evidence.
+- `05-module-concept-and-language.md`: defines the business-language entry point for acquisition.
+- `07-tables-as-contracts.md`: downstream section for converting table evidence into durable contracts.
+- `08-libraries-and-class-contracts.md`: downstream section for documenting public behavior from source evidence.
 - `Methodology/Wiki/insights.md`: records runtime uncertainty and tables-as-contracts as core insights.

@@ -188,9 +188,9 @@ This produces a small route for future agents: user term -> module concept -> us
 
 ## Related Notes
 
-- `05-knowledge-acquisition.md`: defines evidence and uncertainty.
-- `06-tables-as-contracts.md`: defines table contracts.
-- `07-libraries-and-class-contracts.md`: defines behavior contracts.
-- `08-usage-flows-and-patterns.md`: defines scenario and pattern pages.
-- `10-practical-workspace-template.md`: defines the starter workspace and templates.
-- `12-adoption-bootstrap-and-template-audit.md`: downstream section for team adoption and template audit.
+- `06-knowledge-acquisition.md`: defines evidence and uncertainty.
+- `07-tables-as-contracts.md`: defines table contracts.
+- `08-libraries-and-class-contracts.md`: defines behavior contracts.
+- `09-usage-flows-and-patterns.md`: defines scenario and pattern pages.
+- `12-practical-workspace-template.md`: defines the starter workspace and templates.
+- `14-adoption-bootstrap-and-template-audit.md`: downstream section for team adoption and template audit.

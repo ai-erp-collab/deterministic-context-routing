@@ -13,6 +13,7 @@ After this section, the reader can:
 - Register modules, wiki roots, source roots, and artifact roots.
 - Add the templates needed for first module concepts, table contracts, class contracts, usage flows, designs, plans, and session notes.
 - Add confidence labels to important wiki and contract claims.
+- Delegate workspace assembly to an agent via `ASSEMBLY.md`, and explain why its module-inventory phase is required, not optional.
 
 ## Core Explanation
 
@@ -194,7 +195,17 @@ This project also ships a copyable project workspace package in `Methodology/Tem
 
 The root of `Methodology/Templates/` is reserved for templates used to produce this methodology itself, such as `section-contract.md` and `section-dod.md`. Those are product-specific templates for writing this book from section files. They are not required for every ERP project unless that project also produces assembled documentation from source sections.
 
+## Agent-Delegated Assembly
+
+The copyable package also includes `ASSEMBLY.md`: a bootstrap script written for an agent to execute, not a human to follow by hand. Hand it to a coding agent along with the target project's code and documentation, and it works through eight phases in order — copy the template, wire the continuity protocol into the workspace's own injected rules file, capture and confirm the project idea, propose and register modules, intake raw material, build a flat per-module inventory, curate against that inventory, then verify and hand off — checkpointing progress in `session_state.md` after every phase so a session restart at any point picks up exactly where it left off. Every phase names which decisions are `ASK` items the agent must never resolve on its own: capability profile, project-idea confirmation, module boundaries.
+
+The inventory phase (Phase 5) exists for a specific, confirmed reason: a curator that moves straight from raw intake to selective curation reliably captures too little for the resulting pages to support real task work — interactive validation runs confirmed this concretely. Capturing everything unfiltered first, one flat inventory page per module, then curating against that inventory as a completeness checklist, closes that gap. This phase is not optional; skipping it re-introduces the exact under-capture problem it exists to fix.
+
+`ASSEMBLY.md` is a delegation option, not a replacement for understanding the shape below. The Reproducible Procedure that follows describes the same ten steps by hand — useful for a human assembling a workspace without an agent, or for reviewing what a delegated run actually did.
+
 ## Reproducible Procedure
+
+Do this by hand using the steps below, or hand `Templates/project-workspace/ASSEMBLY.md` to a coding agent to run the same shape phase by phase, checkpointing in `session_state.md` between phases.
 
 1. Create the root structure.
    - Add root instructions, root idea, known issues, module registry, root session state, docs, shared knowledge, module knowledge, source artifacts, and at least one module folder.
@@ -260,6 +271,7 @@ Recommended bootstrap artifacts:
 
 - Root `idea.md` for a new project.
 - Module `idea.md` for a new module.
+- `ASSEMBLY.md` (or an equivalent agent-delegated bootstrap script), when the workspace will be assembled by an agent rather than by hand.
 
 Optional artifacts:
 
@@ -294,6 +306,7 @@ That split is the pattern to copy: keep the routing structure universal, and lab
 - Letting `session_state.md` become a hidden wiki instead of a restart note and activity index.
 - Treating Git history, build logs, or test output as a replacement for session state.
 - Failing to enable stronger verification when Git, compiler/build, tests, or runtime access are available.
+- Skipping the module-inventory phase when delegating assembly to an agent, or letting an agent move straight from raw intake to selective curation — this reliably under-captures the material a module's pages need to support real task work.
 
 ## Assumptions And Runtime Limits
 
@@ -304,8 +317,9 @@ That split is the pattern to copy: keep the routing structure universal, and lab
 
 ## Related Notes
 
-- `02-knowledge-system.md`: explains why memory needs layers.
-- `03-workspace-bootstrap.md`: explains the earlier conceptual bootstrap.
-- `09-agentic-workflow-with-superpowers.md`: explains the workflow integration boundary.
-- `11-kb-curator-and-artifact-workflow.md`: downstream section for curator and artifact practice.
-- `12-adoption-bootstrap-and-template-audit.md`: downstream section for adoption and template audit.
+- `03-knowledge-system.md`: explains why memory needs layers.
+- `04-workspace-bootstrap.md`: explains the earlier conceptual bootstrap.
+- `10-agentic-workflow-with-superpowers.md`: explains the workflow integration boundary.
+- `11-how-emergent-capabilities-work.md`: maps the mechanisms this template builds to the capabilities they produce.
+- `13-kb-curator-and-artifact-workflow.md`: downstream section for curator and artifact practice.
+- `14-adoption-bootstrap-and-template-audit.md`: downstream section for adoption and template audit.

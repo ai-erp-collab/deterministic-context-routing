@@ -164,7 +164,7 @@ Source evidence також має життєвий цикл. Сирий арте
 ## Related Notes
 
 - `01-why-this-method-exists.md`: визначає проблему управління контекстом.
-- `03-workspace-bootstrap.md`: перетворює цю модель пам'яті на конкретні файли та папки.
-- `04-module-concept-and-language.md`: пояснює module memory як мовний міст для прийому завдання.
-- `10-practical-workspace-template.md`: наступний розділ про перетворення моделі пам'яті на практичний стартовий workspace.
+- `04-workspace-bootstrap.md`: перетворює цю модель пам'яті на конкретні файли та папки.
+- `05-module-concept-and-language.md`: пояснює module memory як мовний міст для прийому завдання.
+- `12-practical-workspace-template.md`: наступний розділ про перетворення моделі пам'яті на практичний стартовий workspace.
 - `Methodology/Wiki/insights.md`: фіксує принцип необхідного та достатнього контексту.

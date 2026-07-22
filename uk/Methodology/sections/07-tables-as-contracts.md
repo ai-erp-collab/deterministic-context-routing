@@ -113,8 +113,8 @@ After this section, the reader can:
 
 ## Related Notes
 
-- `02-knowledge-system.md`: визначає вихідні свідчення, куровану пам'ять і маршрутизацію контексту.
-- `05-knowledge-acquisition.md`: визначає дозволені свідчення та мітки впевненості.
-- `07-libraries-and-class-contracts.md`: пояснює контракти поведінки, які часто читають чи записують таблиці.
-- `08-usage-flows-and-patterns.md`: наступний розділ про сценарії, що пов'язують кілька таблиць і класів.
+- `03-knowledge-system.md`: визначає вихідні свідчення, куровану пам'ять і маршрутизацію контексту.
+- `06-knowledge-acquisition.md`: визначає дозволені свідчення та мітки впевненості.
+- `08-libraries-and-class-contracts.md`: пояснює контракти поведінки, які часто читають чи записують таблиці.
+- `09-usage-flows-and-patterns.md`: наступний розділ про сценарії, що пов'язують кілька таблиць і класів.
 - `Methodology/Wiki/insights.md`: фіксує tables-as-contracts як основний висновок.

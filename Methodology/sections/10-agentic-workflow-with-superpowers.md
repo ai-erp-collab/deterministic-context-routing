@@ -101,8 +101,9 @@ After that, Superpowers or an equivalent workflow should drive the task: clarify
 
 ## Related Notes
 
-- `04-module-concept-and-language.md`: defines the business-language entry point for task work.
-- `06-tables-as-contracts.md`: defines table contracts used during task scoping.
-- `07-libraries-and-class-contracts.md`: defines behavior contracts used during task scoping.
-- `08-usage-flows-and-patterns.md`: defines scenario pages that connect contracts into business behavior.
-- `10-practical-workspace-template.md`: downstream section for deciding where resulting knowledge belongs in a starter workspace.
+- `05-module-concept-and-language.md`: defines the business-language entry point for task work.
+- `07-tables-as-contracts.md`: defines table contracts used during task scoping.
+- `08-libraries-and-class-contracts.md`: defines behavior contracts used during task scoping.
+- `09-usage-flows-and-patterns.md`: defines scenario pages that connect contracts into business behavior.
+- `11-how-emergent-capabilities-work.md`: downstream section mapping this workflow's mechanisms to the capabilities they produce.
+- `12-practical-workspace-template.md`: downstream section for deciding where resulting knowledge belongs in a starter workspace.

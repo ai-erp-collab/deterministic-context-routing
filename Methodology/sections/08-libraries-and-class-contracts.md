@@ -115,8 +115,8 @@ With that contract, a future task can reason about access behavior without rerea
 
 ## Related Notes
 
-- `05-knowledge-acquisition.md`: defines permitted evidence and confidence labels.
-- `06-tables-as-contracts.md`: explains the data contracts that behavior often relies on.
-- `08-usage-flows-and-patterns.md`: downstream section for composing contracts into business scenarios.
-- `09-agentic-workflow-with-superpowers.md`: downstream section for mapping user requests to affected contracts through a disciplined agent workflow.
-- `10-practical-workspace-template.md`: downstream section for placing contracts in a practical starter workspace.
+- `06-knowledge-acquisition.md`: defines permitted evidence and confidence labels.
+- `07-tables-as-contracts.md`: explains the data contracts that behavior often relies on.
+- `09-usage-flows-and-patterns.md`: downstream section for composing contracts into business scenarios.
+- `10-agentic-workflow-with-superpowers.md`: downstream section for mapping user requests to affected contracts through a disciplined agent workflow.
+- `12-practical-workspace-template.md`: downstream section for placing contracts in a practical starter workspace.

@@ -198,7 +198,7 @@ In a project with Git and a compiler, the same bootstrap would add a project-spe
 ## Related Notes
 
 - `01-why-this-method-exists.md`: explains why context management is necessary.
-- `02-knowledge-system.md`: defines the memory layers this bootstrap implements.
-- `04-module-concept-and-language.md`: downstream section for module language as the natural-language interface.
+- `03-knowledge-system.md`: defines the memory layers this bootstrap implements.
+- `05-module-concept-and-language.md`: downstream section for module language as the natural-language interface.
 - `Methodology/Wiki/research.md`: workspace evidence used by this section.
 - `Methodology/Wiki/review-notes.md`: first-draft gap that required a bootstrap walkthrough.

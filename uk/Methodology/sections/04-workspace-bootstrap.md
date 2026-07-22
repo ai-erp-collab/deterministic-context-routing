@@ -198,7 +198,7 @@ Workspace/
 ## Related Notes
 
 - `01-why-this-method-exists.md`: пояснює, чому управління контекстом необхідне.
-- `02-knowledge-system.md`: визначає шари пам'яті, які реалізує цей bootstrap.
-- `04-module-concept-and-language.md`: наступний розділ про мову модуля як інтерфейс природної мови.
+- `03-knowledge-system.md`: визначає шари пам'яті, які реалізує цей bootstrap.
+- `05-module-concept-and-language.md`: наступний розділ про мову модуля як інтерфейс природної мови.
 - `Methodology/Wiki/research.md`: свідчення workspace, використані в цьому розділі.
 - `Methodology/Wiki/review-notes.md`: прогалина першого чернетки, яка вимагала покрокового опису bootstrap.

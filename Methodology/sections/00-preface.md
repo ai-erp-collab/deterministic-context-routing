@@ -34,23 +34,25 @@ The practical benefits are:
 ## Table Of Contents
 
 1. **Why This Method Exists**: the context-management problem and why proprietary ERP work exposes it sharply.
-2. **Knowledge System**: the memory layers that keep durable knowledge separate from short task context.
-3. **Workspace Bootstrap**: the root files and folders that make the method operational.
-4. **Module Concept And Language**: the bridge between user intent and technical objects.
-5. **Knowledge Acquisition**: how evidence becomes durable, uncertainty-aware knowledge.
-6. **Tables As Contracts**: table schemas as business and data contracts.
-7. **Libraries And Class Contracts**: APIs, classes, functions, and runtime assumptions as behavior contracts.
-8. **Usage Flows And Patterns**: scenario pages that connect tables and contracts into working behavior.
-9. **Agentic Workflow With Superpowers**: how this knowledge system integrates with design, planning, implementation, and verification workflows.
-10. **Practical Workspace Template**: the starter structure, instruction files, templates, and bootstrap artifacts.
-11. **KB Curator And Artifact Workflow**: the raw-to-curated-to-processed workflow for source evidence.
-12. **Adoption Bootstrap And Template Audit**: how to prove the method on one module and check the guide against shipped templates.
+2. **What You Get: Emergent Capabilities**: the practical capabilities the method delivers, before the mechanism is explained.
+3. **Knowledge System**: the memory layers that keep durable knowledge separate from short task context.
+4. **Workspace Bootstrap**: the root files and folders that make the method operational.
+5. **Module Concept And Language**: the bridge between user intent and technical objects.
+6. **Knowledge Acquisition**: how evidence becomes durable, uncertainty-aware knowledge.
+7. **Tables As Contracts**: table schemas as business and data contracts.
+8. **Libraries And Class Contracts**: APIs, classes, functions, and runtime assumptions as behavior contracts.
+9. **Usage Flows And Patterns**: scenario pages that connect tables and contracts into working behavior.
+10. **Agentic Workflow With Superpowers**: how this knowledge system integrates with design, planning, implementation, and verification workflows.
+11. **How Emergent Capabilities Work**: maps each capability from section 2 to the specific mechanism that produces it.
+12. **Practical Workspace Template**: the starter structure, instruction files, templates, and bootstrap artifacts.
+13. **KB Curator And Artifact Workflow**: the raw-to-curated-to-processed workflow for source evidence.
+14. **Adoption Bootstrap And Template Audit**: how to prove the method on one module and check the guide against shipped templates.
 
 ## How To Read This
 
-For the concept, read sections `01` through `09` in order. They explain why the method works.
+For the concept, read sections `01` through `11` in order. They explain why the method works.
 
-For adoption, start with sections `10`, `11`, and `12`. They show the copyable workspace shape, the curator workflow, and the audit loop.
+For adoption, start with sections `12`, `13`, and `14`. They show the copyable workspace shape, the curator workflow, and the audit loop.
 
 For an existing project, do not try to rewrite everything at once. Pick one module, write or identify its module concept, curate one real artifact, run one workflow-backed task, and update session state. The method becomes useful when it proves itself on a narrow slice.
 
@@ -78,5 +80,5 @@ The goal is not to create a perfect encyclopedia. The goal is to keep exactly en
 ## Related Notes
 
 - `01-why-this-method-exists.md`: explains the core context problem.
-- `10-practical-workspace-template.md`: gives the starter workspace shape.
-- `12-adoption-bootstrap-and-template-audit.md`: gives the adoption path and template audit.
+- `12-practical-workspace-template.md`: gives the starter workspace shape.
+- `14-adoption-bootstrap-and-template-audit.md`: gives the adoption path and template audit.

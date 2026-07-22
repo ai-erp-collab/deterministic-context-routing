@@ -227,9 +227,9 @@ This proves the process on a narrow slice before scaling it across modules.
 
 ## Related Notes
 
-- `03-workspace-bootstrap.md`: conceptual bootstrap background.
-- `09-agentic-workflow-with-superpowers.md`: recommended workflow boundary.
-- `10-practical-workspace-template.md`: practical starter workspace template.
-- `11-kb-curator-and-artifact-workflow.md`: curator and artifact workflow.
+- `04-workspace-bootstrap.md`: conceptual bootstrap background.
+- `10-agentic-workflow-with-superpowers.md`: recommended workflow boundary.
+- `12-practical-workspace-template.md`: practical starter workspace template.
+- `13-kb-curator-and-artifact-workflow.md`: curator and artifact workflow.
 - `Methodology/Templates/project-workspace/`: actual project workspace templates used for the audit.
 - `Methodology/Templates/section-contract.md` and `Methodology/Templates/section-dod.md`: Methodology-module templates, not part of the copyable project workspace.

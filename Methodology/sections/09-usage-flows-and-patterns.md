@@ -106,7 +106,7 @@ That flow lets the next task start from the scenario. The agent can then follow 
 
 ## Related Notes
 
-- `04-module-concept-and-language.md`: defines module terms and intent patterns that should link to important flows.
-- `06-tables-as-contracts.md`: defines the data contracts used inside flows.
-- `07-libraries-and-class-contracts.md`: defines the behavior contracts used inside flows.
-- `09-agentic-workflow-with-superpowers.md`: downstream section for using flows during disciplined agent task work.
+- `05-module-concept-and-language.md`: defines module terms and intent patterns that should link to important flows.
+- `07-tables-as-contracts.md`: defines the data contracts used inside flows.
+- `08-libraries-and-class-contracts.md`: defines the behavior contracts used inside flows.
+- `10-agentic-workflow-with-superpowers.md`: downstream section for using flows during disciplined agent task work.

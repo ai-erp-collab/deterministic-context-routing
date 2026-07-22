@@ -164,7 +164,7 @@ The same request also demonstrates context routing. The agent reads the current 
 ## Related Notes
 
 - `01-why-this-method-exists.md`: defines the context-management problem.
-- `03-workspace-bootstrap.md`: turns this memory model into concrete files and folders.
-- `04-module-concept-and-language.md`: explains module memory as the language bridge for task intake.
-- `10-practical-workspace-template.md`: downstream section for turning the memory model into a practical starter workspace.
+- `04-workspace-bootstrap.md`: turns this memory model into concrete files and folders.
+- `05-module-concept-and-language.md`: explains module memory as the language bridge for task intake.
+- `12-practical-workspace-template.md`: downstream section for turning the memory model into a practical starter workspace.
 - `Methodology/Wiki/insights.md`: records the necessary-and-sufficient context principle.

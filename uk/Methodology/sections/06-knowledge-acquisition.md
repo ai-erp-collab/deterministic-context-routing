@@ -153,8 +153,8 @@ After this section, the reader can:
 ## Related Notes
 
 - `01-why-this-method-exists.md`: пояснює, чому пропрієтарна ERP-робота є проблемою управління контекстом.
-- `02-knowledge-system.md`: визначає шари пам'яті та вихідні свідчення.
-- `04-module-concept-and-language.md`: визначає точку входу бізнес-мовою для отримання знань.
-- `06-tables-as-contracts.md`: наступний розділ про перетворення свідчень таблиць на довготривалі контракти.
-- `07-libraries-and-class-contracts.md`: наступний розділ про документування публічної поведінки з вихідних свідчень.
+- `03-knowledge-system.md`: визначає шари пам'яті та вихідні свідчення.
+- `05-module-concept-and-language.md`: визначає точку входу бізнес-мовою для отримання знань.
+- `07-tables-as-contracts.md`: наступний розділ про перетворення свідчень таблиць на довготривалі контракти.
+- `08-libraries-and-class-contracts.md`: наступний розділ про документування публічної поведінки з вихідних свідчень.
 - `Methodology/Wiki/insights.md`: фіксує runtime-невизначеність і tables-as-contracts як основні висновки.

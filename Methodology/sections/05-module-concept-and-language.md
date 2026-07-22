@@ -146,8 +146,8 @@ The agent can now ask a focused question if "see" is ambiguous, inspect the smal
 ## Related Notes
 
 - `01-why-this-method-exists.md`: explains the necessary-and-sufficient context goal.
-- `02-knowledge-system.md`: defines module memory and shared memory.
-- `03-workspace-bootstrap.md`: defines the module registry and wiki roots that host module concepts.
-- `05-knowledge-acquisition.md`: explains how missing module knowledge is collected and classified.
-- `09-agentic-workflow-with-superpowers.md`: downstream section for applying module language to a concrete request through a disciplined agent workflow.
+- `03-knowledge-system.md`: defines module memory and shared memory.
+- `04-workspace-bootstrap.md`: defines the module registry and wiki roots that host module concepts.
+- `06-knowledge-acquisition.md`: explains how missing module knowledge is collected and classified.
+- `10-agentic-workflow-with-superpowers.md`: downstream section for applying module language to a concrete request through a disciplined agent workflow.
 - `Methodology/Wiki/insights.md`: records the module concept as the semantic interface for natural-language tasks.

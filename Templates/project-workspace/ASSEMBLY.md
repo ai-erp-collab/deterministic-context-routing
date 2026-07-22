@@ -108,25 +108,67 @@ Checkpoint: write the Phase 3 entry.
 
 Checkpoint: write the Phase 4 entry.
 
-## Phase 5 — First curation runs (repeat per module, resumable)
+## Phase 5 — Module inventory (repeat per module, before curation)
+
+Before writing any curated wiki page, capture everything the raw
+material contains, unfiltered. This phase exists because selecting
+"the most load-bearing" material on a first pass silently drops real
+facts that later turn out to matter — the inventory removes that
+selection pressure by capturing everything first, then letting
+curation select from a complete list instead of from raw material.
+This is not optional: a curator that skips straight to selective
+curation reliably writes too little for the resulting pages to
+support real task work, which is why this phase has no alternative.
 
 For one module at a time:
 
+1. Read every raw artifact placed for this module in Phase 4, in
+   full — not selectively, not "enough to get the gist."
+2. Write one flat inventory page,
+   `knowledge-base/modules/<module>/inventory.md`, listing every
+   named mechanism, function, flag, constant, convention, naming
+   rule, or constraint found, one line each, with the source file it
+   came from. Do not organize this page into concept/contract/table
+   structure and do not omit an item because it seems minor, rare,
+   internal, or already implied elsewhere in the raw
+   material — completeness, not readability, is this page's only
+   job.
+3. Do not judge importance yet. If in doubt whether something is
+   named prominently enough to count, include it — Phase 6 is where
+   selection and structure happen, not this phase.
+4. Checkpoint after each module — one module per session is
+   reasonable pace, same as Phase 6.
+
+When all registered modules have an inventory page, Phase 5 is done.
+
+Checkpoint: write the Phase 5 entry.
+
+## Phase 6 — First curation runs (repeat per module, resumable)
+
+For one module at a time:
+
+0. Read the module's `inventory.md` from Phase 5 before writing any
+   page — it is the checklist this phase works against.
 1. Write the module concept page from `templates/wiki/`'s
    module-concept template, based on that module's raw materials.
 2. Curate the module's most load-bearing artifacts first (a core table,
    contract, or usage flow), moving each processed source from raw
-   toward processed per the workspace rules.
+   toward processed per the workspace rules. Every item on the
+   module's `inventory.md` must end up on a concept/contract/table
+   page, or be marked in `inventory.md` itself as deliberately
+   excluded (e.g. internal, deprecated, out of scope) with a one-line
+   reason. Load-bearing material first is still the right drafting
+   order; every item still accounted for is the new requirement.
 3. Label every non-obvious claim with a confidence label.
 4. Checkpoint after each module — one module per session is a
    reasonable pace on large projects.
 
 When all registered modules have at least a concept page and one
-curated artifact, Phase 5 is done.
+curated artifact, Phase 6 is done.
 
-Checkpoint: write the Phase 5 entry (also per module, per rule above).
+Checkpoint: write the Phase 6 entry (also per module, per rule above).
 
-## Phase 6 — Verification and handoff
+## Phase 7 — Verification and handoff
 
 Confirm each item; fix before finishing if any fails:
 
@@ -137,7 +179,11 @@ Confirm each item; fix before finishing if any fails:
    concept page, and at least one curated artifact.
 4. `source-artifacts/INDEX.md` accounts for everything in raw.
 5. Every non-obvious curated claim carries a confidence label.
-6. `session_state.md` ends with a final entry: "Assembly complete;
+6. Every line in every module's `inventory.md` is either represented
+   on a curated page or explicitly marked excluded with a reason —
+   spot-check by grepping a sample of inventory items against the
+   curated pages.
+7. `session_state.md` ends with a final entry: "Assembly complete;
    next action: first real task."
 
 Tell the user assembly is complete and name the first real task you

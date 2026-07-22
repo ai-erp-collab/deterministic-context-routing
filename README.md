@@ -1,7 +1,7 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.1.0-draft](https://img.shields.io/badge/status-v0.1.0--draft-orange)
+![Status: v0.4.0-draft](https://img.shields.io/badge/status-v0.4.0--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
@@ -18,6 +18,7 @@ and no git.
 
 - [The Problem](#the-problem)
 - [The Solution](#the-solution)
+- [What You Get](#what-you-get)
 - [Why ERP](#why-erp)
 - [Who This Is For](#who-this-is-for)
 - [Quickstart](#quickstart)
@@ -66,6 +67,37 @@ and no git.
   <img alt="Deterministic Context Routing, three connected panels: Deterministic Routing (User Task Intake resolved through the Module Registry in modules.md to a Module Concept Page); Layered Memory System (Short Memory in session_state.md, Medium Memory in docs/, Long Memory holding Tables as Contracts, Class Contracts, and Usage Flows and Patterns, and Source Evidence moving Raw to Curated to Processed); Agent Engine and Gates (Superpowers workflow integration, a Bounded Active Context, a Confidence Matrix of confirmed, inferred, runtime-unverified, and blocked-by-access, and Static Verification Gates); a Continuous Documentation Sync loop feeds discoveries from the Agent Engine back into routing and memory" src="assets/context-routing-diagram-light.svg">
 </picture>
 
+## What You Get
+
+These aren't features you configure — they emerge once the workspace structure above is in place.
+
+- **Session without loss** — close the session, reopen it, disappear for a
+  month: the agent resumes from exactly where you stopped, no
+  re-explaining.
+- **Switching costs nothing** — move between active modules and back
+  without blending or losing either one's thread; each module keeps its
+  own session state.
+- **Full module history** — every session is preserved; reconstruct a
+  module's whole timeline by reading from the start, not from memory.
+- **Remember everything** — local or shared, knowledge is reachable from
+  one agent window in the current session, no manual gathering first.
+- **Find and use the best** — ask the agent to compare how other projects
+  solve the same problem and apply the strongest approach, no
+  hand-copying between them.
+- **Agent knows what's checked** — every claim carries a confidence
+  label, and the agent acts on it: confidently on a confirmed fact,
+  cautiously on an unverified one.
+
+A few more things you'll notice: a controlled test against a popular
+flat-memory pattern for agents measured 30% lower cost even on small
+projects — and the gap projects to be far larger on bigger ones. New
+modules bootstrap from a template in minutes, not days — hand
+`Templates/project-workspace/ASSEMBLY.md` to an agent and it runs the
+same phases itself, including a module-inventory pass that keeps the
+resulting knowledge base from starting too thin. And twice, unprompted,
+the agent caught a real defect in its own knowledge base while doing
+something else entirely.
+
 ## Why ERP
 
 Deterministic Context Routing isn't ERP-specific — it's a response to four
@@ -110,7 +142,7 @@ your coding agent — it runs these steps phase by phase, checkpoints its
 progress in `session_state.md`, and asks you only for the decisions.
 
 For the full walkthrough, see
-`Methodology/sections/10-practical-workspace-template.md`.
+`Methodology/sections/12-practical-workspace-template.md`.
 
 ## How This Compares
 
@@ -118,7 +150,7 @@ For the full walkthrough, see
 disciplined skills/workflow framework for how an agent executes a session
 (brainstorming, planning, TDD, code review). This methodology is about what
 domain context the agent should have before it starts.
-`Methodology/sections/09-agentic-workflow-with-superpowers.md` covers
+`Methodology/sections/10-agentic-workflow-with-superpowers.md` covers
 wiring the two together.
 
 **vs. MCP** — MCP is a protocol for exposing tools and data sources to an

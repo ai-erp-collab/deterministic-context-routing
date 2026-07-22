@@ -7,6 +7,41 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.4.0-draft] - 2026-07-22
+
+### Added
+
+- `Methodology/sections/02-emergent-capabilities.md` ("What You Get"): six
+  reader-facing capabilities the method delivers — session continuity,
+  cost-free module switching, full module history, single-window access to
+  local/shared knowledge, cross-project reuse, and confidence-aware agent
+  behavior — plus a shorter bonus block (measured cost savings, fast
+  module bootstrap, incidental correctness auditing). Placed early in the
+  reading order, right after the problem statement.
+- `Methodology/sections/11-how-emergent-capabilities-work.md`: maps each of
+  the six capabilities above to the specific mechanism that produces it,
+  and to why a flat, always-loaded memory pattern cannot reproduce it.
+  Placed after the agentic-workflow section, as a mechanism recap before
+  the hands-on workspace-template section.
+- A "What You Get" section in `README.md` and `uk/README.md`, summarizing
+  the same six capabilities.
+- A module-inventory phase (`ASSEMBLY.md` Phase 5) in
+  `Templates/project-workspace/ASSEMBLY.md`: a flat, unfiltered per-module
+  capture pass inserted between raw-material intake and curation, so
+  curation selects from a complete list instead of from raw material
+  directly. Documented in `Methodology/sections/12-practical-workspace-template.md`
+  under a new "Agent-Delegated Assembly" subsection.
+
+### Changed
+
+- Renumbered every file in `Methodology/sections/` (and its `uk/` mirror)
+  from the `02`-`12` range to `03`-`14` to make room for the two new
+  sections; `00-preface.md`'s table of contents and reading-path ranges
+  updated to match, in both languages.
+- `Templates/project-workspace/ASSEMBLY.md`: existing curation and
+  verification phases renumbered (5→6, 6→7) and cross-referenced against
+  the new inventory phase.
+
 ## [0.3.0-draft] - 2026-07-21
 
 ### Added

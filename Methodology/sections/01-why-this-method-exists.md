@@ -94,7 +94,8 @@ If those facts are already curated, the agent reads the wiki pages and a small n
 
 ## Related Notes
 
-- `02-knowledge-system.md`: explains the memory layers used to manage context.
-- `03-workspace-bootstrap.md`: explains how to create files and folders that make the memory model operational.
-- `04-module-concept-and-language.md`: explains the module concept as the language bridge between user intent and technical objects.
+- `02-emergent-capabilities.md`: shows what the method delivers, before the memory-layer mechanics are explained.
+- `03-knowledge-system.md`: explains the memory layers used to manage context.
+- `04-workspace-bootstrap.md`: explains how to create files and folders that make the memory model operational.
+- `05-module-concept-and-language.md`: explains the module concept as the language bridge between user intent and technical objects.
 - `Methodology/Wiki/insights.md`: records necessary-and-sufficient context as a core insight.

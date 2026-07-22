@@ -227,9 +227,9 @@ After this section, the reader can:
 
 ## Related Notes
 
-- `03-workspace-bootstrap.md`: концептуальний фон bootstrap.
-- `09-agentic-workflow-with-superpowers.md`: рекомендована межа робочого процесу.
-- `10-practical-workspace-template.md`: практичний стартовий шаблон workspace.
-- `11-kb-curator-and-artifact-workflow.md`: робочий процес куратора та артефактів.
+- `04-workspace-bootstrap.md`: концептуальний фон bootstrap.
+- `10-agentic-workflow-with-superpowers.md`: рекомендована межа робочого процесу.
+- `12-practical-workspace-template.md`: практичний стартовий шаблон workspace.
+- `13-kb-curator-and-artifact-workflow.md`: робочий процес куратора та артефактів.
 - `Methodology/Templates/project-workspace/`: фактичні шаблони project workspace, використані для аудиту.
 - `Methodology/Templates/section-contract.md` і `Methodology/Templates/section-dod.md`: шаблони модуля Methodology, не частина копійованого project workspace.

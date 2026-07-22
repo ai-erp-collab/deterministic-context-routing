@@ -29,4 +29,4 @@ values. Keep project-specific rules in clearly marked sections.
 Hand `ASSEMBLY.md` to your agent — it runs the adaptation phase by
 phase and asks you only for the decisions (capability profile, project
 idea confirmation, module boundaries). To adapt by hand instead, follow
-`Methodology/sections/10-practical-workspace-template.md`.
+`Methodology/sections/12-practical-workspace-template.md`.

@@ -113,8 +113,8 @@ The resulting table page should let a future agent answer: "Which table stores t
 
 ## Related Notes
 
-- `02-knowledge-system.md`: defines source evidence, curated memory, and context routing.
-- `05-knowledge-acquisition.md`: defines permitted evidence and confidence labels.
-- `07-libraries-and-class-contracts.md`: explains behavior contracts that often read or write tables.
-- `08-usage-flows-and-patterns.md`: downstream section for scenarios that connect several tables and classes.
+- `03-knowledge-system.md`: defines source evidence, curated memory, and context routing.
+- `06-knowledge-acquisition.md`: defines permitted evidence and confidence labels.
+- `08-libraries-and-class-contracts.md`: explains behavior contracts that often read or write tables.
+- `09-usage-flows-and-patterns.md`: downstream section for scenarios that connect several tables and classes.
 - `Methodology/Wiki/insights.md`: records tables-as-contracts as a core insight.

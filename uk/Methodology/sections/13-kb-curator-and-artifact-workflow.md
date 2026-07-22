@@ -188,9 +188,9 @@ Maintain an agent-first knowledge base for cheap lookup of contracts, functions,
 
 ## Related Notes
 
-- `05-knowledge-acquisition.md`: визначає свідчення та невизначеність.
-- `06-tables-as-contracts.md`: визначає контракти таблиць.
-- `07-libraries-and-class-contracts.md`: визначає контракти поведінки.
-- `08-usage-flows-and-patterns.md`: визначає сторінки сценаріїв і патернів.
-- `10-practical-workspace-template.md`: визначає стартовий workspace і шаблони.
-- `12-adoption-bootstrap-and-template-audit.md`: наступний розділ про впровадження командою та аудит шаблонів.
+- `06-knowledge-acquisition.md`: визначає свідчення та невизначеність.
+- `07-tables-as-contracts.md`: визначає контракти таблиць.
+- `08-libraries-and-class-contracts.md`: визначає контракти поведінки.
+- `09-usage-flows-and-patterns.md`: визначає сторінки сценаріїв і патернів.
+- `12-practical-workspace-template.md`: визначає стартовий workspace і шаблони.
+- `14-adoption-bootstrap-and-template-audit.md`: наступний розділ про впровадження командою та аудит шаблонів.
