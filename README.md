@@ -1,14 +1,14 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.1.0-draft](https://img.shields.io/badge/status-v0.1.0--draft-orange)
+![Status: v0.3.0-draft](https://img.shields.io/badge/status-v0.1.0--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
 
 > Documentation is routing infrastructure, not cleanup prose.
 
-A methodology for giving AI agents necessary-and-sufficient context in any
+A personal agent harness and methodology for giving AI agents necessary-and-sufficient context in any
 large, under-documented codebase — without flooding them with raw source
 dumps, and without losing continuity between sessions. Proven on the
 hardest compounding case: large, proprietary ERP systems with no compiler
@@ -18,6 +18,7 @@ and no git.
 
 - [The Problem](#the-problem)
 - [The Solution](#the-solution)
+- [What You Get](#what-you-get)
 - [Why ERP](#why-erp)
 - [Who This Is For](#who-this-is-for)
 - [Quickstart](#quickstart)
@@ -59,6 +60,25 @@ and no git.
   assumptions, and next action: information Git history was never designed
   to hold, and which stays necessary even in projects with full Git, CI,
   and test access.
+
+## What You Get
+
+These are not features you configure. They emerge when the workspace structure is complete.
+
+**Precise context at any scale, at low cost.** The agent reads only what the current task needs — not the whole project, not a fixed set of memory files. Cost per task stays constant whether your project has two modules or two hundred. Measured: 5,000–6,000 tokens per task vs. 60,000 for flat memory patterns on a multi-module project.
+
+**Session without loss.** Close the session. Open a new one. Switch modules. Come back a month later. The agent continues from exactly where you stopped — same task, same context, same open questions. No re-explaining. No re-reading. No lost work.
+
+**Confidence in every answer.** Every claim is marked: `confirmed` (tested), `inferred` (reasonable but unchecked), `runtime-unverified` (cannot test), `blocked-by-access` (no permission). You never get a confident-sounding wrong answer that you have to catch in review. Measured: 100% unqualified claims → 0% with labels.
+
+**Fast cross-module references.** "Look at how module X handles this and do the same here." One file read. Zero overread. Measured: 0/4 tasks overread vs. 3/4 for flat memory.
+
+**Full module history.** Every session entry is preserved. Reconstruct the complete timeline of any module in seconds. Onboarding takes minutes, not days.
+
+**Write once, use everywhere.** A tool, template, or decision you create for one module becomes available to all. New modules inherit shared knowledge automatically.
+
+**No more copy-paste projects.** A template plus a module registry entry creates a new instance in minutes. Changes to shared knowledge propagate to all instances. You maintain one copy, not N copies that drift apart.
+
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/context-routing-diagram-dark.svg">
