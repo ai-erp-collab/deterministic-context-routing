@@ -1,7 +1,7 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.3.0-draft](https://img.shields.io/badge/status-v0.1.0--draft-orange)
+![Status: v0.3.0-draft](https://img.shields.io/badge/status-v0.3.0--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
