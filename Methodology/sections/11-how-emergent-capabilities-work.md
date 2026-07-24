@@ -11,7 +11,7 @@ After this section, the reader can:
 
 ## Core Explanation
 
-`02-emergent-capabilities.md` named six capabilities and left the mechanism unexplained on purpose — the point of that section was to show what the reader gets, not how. Now that the knowledge system, workspace bootstrap, and agentic workflow sections have introduced the actual pieces (module registry, layered knowledge base, `session_state.md`, confidence labels, the disciplined task workflow), this section can name, for each capability, exactly which piece produces it.
+`02-emergent-capabilities.md` named seven capabilities and left the mechanism unexplained on purpose — the point of that section was to show what the reader gets, not how. Now that the knowledge system, workspace bootstrap, and agentic workflow sections have introduced the actual pieces (module registry, layered knowledge base, `session_state.md`, confidence labels, the disciplined task workflow), this section can name, for each capability, exactly which piece produces it.
 
 Each capability below is explained the same way:
 
@@ -68,12 +68,21 @@ Each capability below is explained the same way:
 
 **How to use it deliberately:** label a claim honestly at the moment you write it, not after the fact — an unlabeled claim defaults to being read as unverified, so the discipline only works if labeling happens during curation, not as cleanup.
 
+### 7. Set the Task in Business Words
+
+**How DCR produces it:** the module concept (`05-module-concept-and-language.md`) maps business vocabulary to technical objects ahead of time — terms, synonyms, primary entities, and extension points, each linked to the wiki, contract, or table page that carries the technical detail. When a request arrives in business language, the agent resolves it through that map first, then follows the links to the specific pages and source locations the request actually touches — including objects the request never named, when the module concept records that they share the same underlying rule.
+
+**Why a flat memory pattern cannot:** the pattern has no structured business-to-technical map at that grain — whether the task is a fix, a feature, or a question, an entity or rule scattered across multiple unrelated-looking objects is only findable by reading or grepping raw source, so either the requester already has to know every location and name it, or the agent has to search broadly and hope it finds all of them.
+
+**How to use it deliberately:** keep the module concept's terminology dictionary and extension points current as they're discovered, not just at bootstrap — a term the module concept doesn't yet map still forces the requester to supply the technical map themselves inside the request, the same as having no module concept at all.
+
 ## How These Capabilities Relate
 
 - **Remember Everything** (single-window reachability across shared and local scope) is the precondition for **Find and Use the Best** — a workspace where local and shared knowledge are not both reachable from one window cannot support cross-module reuse at all.
 - **Session Without Loss** and **Switching Costs Nothing** share one mechanism — the per-module, stop-marked `session_state.md` — applied along two different axes: how long you were away, and how many other modules you touched in between.
 - **Full Module History** is the same file read a different way: from the first entry instead of from the stop marker.
 - **Agent Knows What's Checked** does not produce **Find and Use the Best** — the module registry and `INDEX.md` routing chain does. What confidence labels contribute is trust: they are what lets the agent apply a pattern found in another module without re-verifying every claim on that module's page first.
+- **Find and Use the Best** and **Set the Task in Business Words** both route, but in different directions. Find and Use the Best routes *between* modules to compare how each solves the same problem, via `INDEX.md`. Set the Task in Business Words routes *within* one module, from a single business sentence to the specific technical objects it touches, via the module concept's vocabulary map — a different mechanism producing a different kind of reach.
 
 Adopting a subset of these mechanisms still produces the matching subset of capabilities. The full value appears once all of them are built and kept current together.
 
@@ -90,6 +99,7 @@ Adopting a subset of these mechanisms still produces the matching subset of capa
 - A per-module `session_state.md` with an explicit stop marker.
 - `knowledge-base/modules/<module>/INDEX.md` and `knowledge-base/shared/INDEX.md` as entry points.
 - Confidence labels attached to claims at the time they are written, not retrofitted later.
+- A populated module concept page for the active module, with business vocabulary mapped to technical objects (`05-module-concept-and-language.md`).
 
 ## Example
 
@@ -102,6 +112,8 @@ Continuing the worked example from `02-emergent-capabilities.md`: the user asks 
 - Expecting cross-module reference to work before the target module has a populated knowledge base — the agent can only route to a page that exists.
 - Attributing a capability to the wrong mechanism, as with cross-module reference and confidence labels above — this doesn't just cause a wording mistake, it sends the next troubleshooting effort to the wrong file.
 - Treating the workspace template as a one-time setup step instead of a structure that has to stay populated and current to keep producing these capabilities.
+- Expecting Set the Task in Business Words from a module whose concept page exists but has an empty terminology dictionary or extension-point list — the mapping depends on that content being filled in, not on the page existing.
+- Assuming Set the Task in Business Words only applies to bug reports — the module concept resolves any task shape (fix, feature, question) the same way, as long as the request's vocabulary is already mapped; a term outside the map still needs `06-knowledge-acquisition.md` first.
 
 ## Assumptions And Runtime Limits
 
@@ -113,6 +125,7 @@ Continuing the worked example from `02-emergent-capabilities.md`: the user asks 
 
 - `02-emergent-capabilities.md`: names the capabilities this section maps to mechanisms.
 - `03-knowledge-system.md`: defines the memory layers and context-routing mechanisms used above.
+- `05-module-concept-and-language.md`: defines the module concept mechanism behind Set the Task in Business Words.
 - `04-workspace-bootstrap.md`: creates the concrete files (`session_state.md`, module registry, knowledge-base roots) this section assumes exist.
 - `12-practical-workspace-template.md`: downstream section for turning these mechanisms into a practical starter workspace.
 - `Evidence/01-hermes-agent-cross-framework-validation.md`: source for the session-state and confidence-label mechanism tests referenced above.

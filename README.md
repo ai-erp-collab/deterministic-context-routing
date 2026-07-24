@@ -1,7 +1,7 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.4.0-draft](https://img.shields.io/badge/status-v0.4.0--draft-orange)
+![Status: v0.5.0-draft](https://img.shields.io/badge/status-v0.5.0--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
@@ -87,6 +87,10 @@ These aren't features you configure — they emerge once the workspace structure
 - **Agent knows what's checked** — every claim carries a confidence
   label, and the agent acts on it: confidently on a confirmed fact,
   cautiously on an unverified one.
+- **Set the task in business words** — a fix, a feature, or a question all
+  resolve the same way: the module concept maps your words to the real
+  files and objects behind them, including ones you never named, as long
+  as the vocabulary is already mapped.
 
 A few more things you'll notice: a controlled test against a popular
 flat-memory pattern for agents measured 30% lower cost even on small

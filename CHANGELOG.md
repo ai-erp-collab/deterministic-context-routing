@@ -7,6 +7,35 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.5.0-draft] - 2026-07-24
+
+### Added
+
+- `Methodology/sections/02-emergent-capabilities.md` ("What You Get"): a
+  7th capability, "Set the Task in Business Words" — a fix, feature,
+  extension, or plain question phrased in business vocabulary the module
+  concept already has mapped resolves to the right technical objects
+  through that map, without the requester needing to already know the
+  codebase. Includes one real worked case (a fix) and an explicit boundary
+  (unmapped vocabulary still needs knowledge acquisition first).
+- `Methodology/sections/11-how-emergent-capabilities-work.md`: matching
+  mechanism entry for capability 7 (the module concept's vocabulary map),
+  and a "How These Capabilities Relate" note distinguishing it from
+  capability 5 — cross-module routing vs. within-module vocabulary
+  mapping.
+- A 7th bullet in `README.md` and `uk/README.md`'s "What You Get" section
+  summarizing the same capability.
+- Ukrainian translation of all capability-7 additions across
+  `uk/Methodology/sections/02-emergent-capabilities.md`,
+  `11-how-emergent-capabilities-work.md`, and the one new cross-reference
+  in `05-module-concept-and-language.md`.
+
+### Changed
+
+- `Methodology/sections/05-module-concept-and-language.md`: added a
+  Related Notes link forward to capabilities 02/11, since that section
+  already defined the underlying module-concept mechanism these build on.
+
 ## [0.4.0-draft] - 2026-07-22
 
 ### Added

@@ -150,4 +150,5 @@ After this section, the reader can:
 - `04-workspace-bootstrap.md`: визначає реєстр модулів і корені wiki, які розміщують концепції модулів.
 - `06-knowledge-acquisition.md`: пояснює, як відсутні знання модуля збираються та класифікуються.
 - `10-agentic-workflow-with-superpowers.md`: наступний розділ про застосування мови модуля до конкретного запиту через дисциплінований робочий процес агента.
+- `02-emergent-capabilities.md` та `11-how-emergent-capabilities-work.md`: називають Set the Task in Business Words як доставлену можливість, яку створює цей механізм, із розібраним випадком.
 - `Methodology/Wiki/insights.md`: фіксує концепцію модуля як семантичний інтерфейс для завдань природною мовою.
