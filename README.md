@@ -83,7 +83,8 @@ These aren't features you configure — they emerge once the workspace structure
   one agent window in the current session, no manual gathering first.
 - **Find and use the best** — ask the agent to compare how other projects
   solve the same problem and apply the strongest approach, no
-  hand-copying between them.
+  hand-copying between them. Inside one system it goes further: a rule
+  another module already owns is called and extended there, not copied.
 - **Agent knows what's checked** — every claim carries a confidence
   label, and the agent acts on it: confidently on a confirmed fact,
   cautiously on an unverified one.

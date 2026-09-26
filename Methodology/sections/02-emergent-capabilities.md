@@ -43,6 +43,8 @@ Knowledge belongs at one of two scopes: module-local, or shared across the whole
 
 Say you run several projects in the same general area — several AI-automation projects, for instance, each with its own take on a recurring problem like checking an LLM's output for evidence, or structuring a prompt. You do not have to hand-copy code or notes between them. Ask the agent to look at how one project handles it and apply the same approach to another, and it will — and it can go further: compare how several of them solve the same problem and recommend the strongest one for the task at hand, rather than just copying whichever one you happened to name.
 
+Inside one system the rule is stricter. When two modules of the same ERP need the same business rule, such as user access to documents, the agent does not copy it into the second module: on your question it finds the module that owns the rule, and on your command it extends that module and calls it from yours, leaving a note in the owner module about what changed and why (`08-libraries-and-class-contracts.md`, `10-agentic-workflow-with-superpowers.md`).
+
 **What this means in practice:** cross-project consistency stops being a manual chore. `Evidence/01`, Test 1, measured the underlying retrieval step this depends on: across six information-retrieval tasks, the DCR-structured workspace read one file per task on average against 3.8 files for a flat structure, and overread on zero of six tasks against three of six for the flat structure.
 
 ### 6. Agent Knows What's Checked

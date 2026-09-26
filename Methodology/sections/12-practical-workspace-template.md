@@ -54,6 +54,9 @@ workspace/
     tables/
       raw/
       processed/
+  skills/
+    cross-module-owner-api/
+      SKILL.md
   <module>/
     AGENTS.md
     idea.md      # bootstrap input, not recurring memory
@@ -93,11 +96,15 @@ Root `AGENTS.md` should define universal behavior first:
 - Keep module-specific durable knowledge in the module wiki.
 - Keep reusable platform or cross-module knowledge in shared knowledge.
 - Keep raw source artifacts separate from curated knowledge.
+- Work in one active module. Reach into another module only when the user asks about it (read only) or commands a change there; then follow the `cross-module-owner-api` skill.
+- Never copy another module's rule into the active module; call its owner API. Every write into another module leaves a mark in that module.
 - Update the active module `session_state.md` after every non-conversational task.
 - Update root `session_state.md` only as a compact module activity index.
 - When full automated testing is impossible, document static checks and remaining runtime assumptions.
 - Keep `session_state.md` even when Git exists; Git records file history, while session state records task intent, evidence, assumptions, verification, and next action.
 ```
+
+The two cross-module lines stay short on purpose: they are read at every session start, while the full procedure from `10-agentic-workflow-with-superpowers.md` lives in the skill and is loaded only when a task actually reaches into another module.
 
 The root `idea.md` is not part of the recurring reading path. Use it as a one-time bootstrap input: a user can say, "Here is the project idea; read it, ask questions if anything is unclear, and create the needed starter artifacts." After bootstrap, the durable meaning should live in `modules.md`, module instructions, module concept pages, plans, and session notes.
 
@@ -183,7 +190,8 @@ At minimum, create templates for:
 - usage flow page;
 - design doc;
 - implementation plan;
-- session-state entry.
+- session-state entry;
+- cross-module session-state entry, left in an owner module when another module changes it.
 
 Wiki and contract templates should separate page status from claim confidence. `status` says whether the page is complete enough for use. `confidence` says how a specific fact is supported: `confirmed`, `inferred`, `runtime-unverified`, or `blocked-by-access`.
 
@@ -192,6 +200,8 @@ Project and module `idea.md` files are recommended bootstrap inputs, especially 
 This project stores the copyable project-workspace templates in `Methodology/Templates/project-workspace/templates/`. Another project can store them under root `templates/` or a module docs folder, but the templates should be easy for agents to find.
 
 This project also ships a copyable project workspace package in `Methodology/Templates/project-workspace/`. It contains root and module `idea.md` files, root starter files, one example module, knowledge roots, source artifact folders, workflow folders, and reusable page templates grouped into `wiki`, `workflow`, and `session` template folders. Treat it as a starting point to adapt, not as a finished project configuration.
+
+The package also carries a `skills/` folder with one skill, `cross-module-owner-api`, which runs the cross-module procedure from `10-agentic-workflow-with-superpowers.md`: question or command mode, the fixed lookup order, the owner API, the link left in the consumer, and the mark left in the owner. The folder is platform-neutral; during assembly the skill is installed wherever the target agent platform loads skills, or referenced by path from the rules file when the platform has no skill mechanism.
 
 The root of `Methodology/Templates/` is reserved for templates used to produce this methodology itself, such as `section-contract.md` and `section-dod.md`. Those are product-specific templates for writing this book from section files. They are not required for every ERP project unless that project also produces assembled documentation from source sections.
 
@@ -236,8 +246,9 @@ Do this by hand using the steps below, or hand `Templates/project-workspace/ASSE
    - Include the stop marker rule for module histories that accumulate entries.
 
 7. Add starter templates.
-   - Create module concept, table, contract, usage flow, design, plan, and session-state templates.
+   - Create module concept, table, contract, usage flow, design, plan, and session-state templates, including the cross-module session-state entry.
    - Keep templates short enough to be reused, not polished into prose essays.
+   - Add the `cross-module-owner-api` skill and install it where the agent platform loads skills.
 
 8. Add artifact lifecycle folders.
    - Create raw and processed source artifact areas.

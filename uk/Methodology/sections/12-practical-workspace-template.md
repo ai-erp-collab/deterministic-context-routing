@@ -54,6 +54,9 @@ workspace/
     tables/
       raw/
       processed/
+  skills/
+    cross-module-owner-api/
+      SKILL.md
   <module>/
     AGENTS.md
     idea.md      # bootstrap input, not recurring memory
@@ -93,11 +96,15 @@ Methodology/
 - Keep module-specific durable knowledge in the module wiki.
 - Keep reusable platform or cross-module knowledge in shared knowledge.
 - Keep raw source artifacts separate from curated knowledge.
+- Work in one active module. Reach into another module only when the user asks about it (read only) or commands a change there; then follow the `cross-module-owner-api` skill.
+- Never copy another module's rule into the active module; call its owner API. Every write into another module leaves a mark in that module.
 - Update the active module `session_state.md` after every non-conversational task.
 - Update root `session_state.md` only as a compact module activity index.
 - When full automated testing is impossible, document static checks and remaining runtime assumptions.
 - Keep `session_state.md` even when Git exists; Git records file history, while session state records task intent, evidence, assumptions, verification, and next action.
 ```
+
+Два міжмодульні рядки навмисно короткі: їх читають на старті кожної сесії, а повна процедура з `10-agentic-workflow-with-superpowers.md` живе в скилі й завантажується лише тоді, коли завдання справді сягає в інший модуль.
 
 Кореневий `idea.md` не є частиною регулярного шляху читання. Використовуйте його як одноразовий bootstrap-вхід: користувач може сказати: "Ось ідея проєкту; прочитай її, постав питання, якщо щось неясно, і створи потрібні стартові артефакти." Після bootstrap довготривале значення повинно жити в `modules.md`, модульних інструкціях, сторінках концепції модуля, планах і нотатках сесії.
 
@@ -183,7 +190,8 @@ Methodology/
 - сторінки сценарію використання;
 - документа дизайну;
 - плану реалізації;
-- запису стану сесії.
+- запису стану сесії;
+- міжмодульного запису стану сесії, що залишається в модулі-власнику, коли його змінює інший модуль.
 
 Шаблони wiki та контрактів повинні відокремлювати статус сторінки від впевненості твердження. `status` каже, чи сторінка достатньо повна для використання. `confidence` каже, наскільки конкретний факт підтверджений: `confirmed`, `inferred`, `runtime-unverified` чи `blocked-by-access`.
 
@@ -192,6 +200,8 @@ Methodology/
 Цей проєкт зберігає копійовані шаблони project-workspace у `Methodology/Templates/project-workspace/templates/`. Інший проєкт може зберігати їх під кореневим `templates/` чи папкою docs модуля, але шаблони повинні бути легко доступними для агентів.
 
 Цей проєкт також постачає копійований пакет project workspace у `Methodology/Templates/project-workspace/`. Він містить кореневі та модульні файли `idea.md`, кореневі стартові файли, один приклад модуля, корені знань, папки вихідних артефактів, папки робочого процесу та багаторазові шаблони сторінок, згруповані в папки шаблонів `wiki`, `workflow` і `session`. Розглядайте це як стартову точку для адаптації, а не як завершену конфігурацію проєкту.
+
+Пакет також містить папку `skills/` з одним скилом, `cross-module-owner-api`, який виконує міжмодульну процедуру з `10-agentic-workflow-with-superpowers.md`: режим питання чи команди, фіксований порядок пошуку, owner API, посилання, що залишається у споживачі, і позначку, що залишається у власнику. Папка не прив'язана до платформи; під час складання скил встановлюють туди, звідки цільова агентна платформа завантажує скили, або, якщо платформа не має механізму скилів, на нього посилаються за шляхом із файлу правил.
 
 Корінь `Methodology/Templates/` зарезервований для шаблонів, що використовуються для виробництва самої цієї методології, таких як `section-contract.md` і `section-dod.md`. Це специфічні для продукту шаблони для написання цієї книги з файлів розділів. Вони не потрібні кожному ERP-проєкту, якщо тільки цей проєкт також не виробляє зібрану документацію з вихідних розділів.
 
@@ -236,8 +246,9 @@ Methodology/
    - Включіть правило стоп-маркера для історій модулів, що накопичують записи.
 
 7. Додайте стартові шаблони.
-   - Створіть шаблони концепції модуля, таблиці, контракту, сценарію використання, дизайну, плану та стану сесії.
+   - Створіть шаблони концепції модуля, таблиці, контракту, сценарію використання, дизайну, плану та стану сесії, зокрема міжмодульного запису стану сесії.
    - Тримайте шаблони достатньо короткими для повторного використання, не відшліфовуйте їх до прозових есе.
+   - Додайте скил `cross-module-owner-api` і встановіть його туди, звідки агентна платформа завантажує скили.
 
 8. Додайте папки життєвого циклу артефактів.
    - Створіть зони сирих і оброблених вихідних артефактів.

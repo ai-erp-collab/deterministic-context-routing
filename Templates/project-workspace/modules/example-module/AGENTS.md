@@ -9,11 +9,16 @@
 - Work on one task or knowledge page at a time.
 - Update `session_state.md` after every non-conversational module task.
 - Preserve project encoding and verification rules.
+- If the latest `session_state.md` entry is a cross-module change, another module changed this one: review what changed and why, then continue from its `Next useful action`.
 
 ## Module-Specific Rules
 
 - Example: record module runtime limits here.
 - Example: record source access or artifact handling rules here.
+
+## Cross-Module Links
+
+- Example: record here each rule this module takes from another module, with the owner module name and a link to the owner contract page, so the next task calls the owner API instead of searching again.
 
 ## Bootstrap Note
 

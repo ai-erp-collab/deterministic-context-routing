@@ -45,6 +45,7 @@ Apply the methodology to one module without trying to document the entire system
 - [ ] Write a short task plan before implementation.
 - [ ] Record assumptions that cannot be verified locally.
 - [ ] Make the smallest useful change.
+- [ ] If the task needs a rule another module owns, reach into that module only on your question (read only) or command (change allowed): call its owner API instead of copying the rule, once you act on it, link the owner contract page from this module (a plain question leaves no link), and leave a cross-module mark in the owner module.
 - [ ] Run available Git inspection, compiler/build checks, automated tests, runtime checks, static checks, and guardrail scans according to the capability profile.
 
 ## 6. Record The Result

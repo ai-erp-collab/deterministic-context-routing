@@ -22,7 +22,8 @@ values. Keep project-specific rules in clearly marked sections.
 - `modules/example-module/`: example module idea, instructions, and restart memory.
 - `templates/wiki/`: module concept, table, contract, and usage-flow page templates.
 - `templates/workflow/`: design and implementation-plan templates.
-- `templates/session/`: session-state entry template.
+- `templates/session/`: session-state entry templates, including the cross-module entry left in an owner module.
+- `skills/`: platform-neutral agent skills; `cross-module-owner-api` handles work that reaches from the active module into another module. Install them where your agent platform loads skills.
 
 ## Adapting the Template
 

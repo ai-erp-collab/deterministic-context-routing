@@ -34,3 +34,8 @@ confidence: confirmed|inferred|runtime-unverified|blocked-by-access
 
 - examples: [[usage/...]]
 - tables: [[tables/...]]
+- consumers: <other modules allowed to call this API, or none>
+
+## Change History
+
+- <YYYY-MM-DD>: <consumer module or task>; <what changed>; <why>

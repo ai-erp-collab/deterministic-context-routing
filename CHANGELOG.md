@@ -7,6 +7,36 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.6.0-draft] - 2026-09-26
+
+### Added
+
+- `Methodology/sections/08-libraries-and-class-contracts.md`: "Cross-Module
+  Rules: Owner API Instead Of Copies" — when one module needs a rule that
+  belongs to another, the owner module exposes a small owner API and the
+  consumer keeps only an adapter. Includes a procedure step, a worked
+  `Alpha`/`Beta` example, the consumer-list check before changing an owner
+  API, and failure modes such as an access adapter that fails open.
+- `Methodology/sections/10-agentic-workflow-with-superpowers.md`:
+  "Cross-Module Work From One Module" — cross-module work starts only from
+  a user question (read only) or command (change allowed), follows a fixed
+  lookup order (consumer links, named module, module registry, owner
+  knowledge base, owner code last), leaves a link in the consumer once the
+  rule is taken into work (a plain question leaves none), and
+  leaves a two-layer mark in the owner: a cross-module `session_state.md`
+  entry that carries over the owner's own next action, plus the owner
+  contract page's consumer list and change history.
+- `Templates/project-workspace/skills/cross-module-owner-api/SKILL.md`: the
+  template's first agent skill, running that procedure; platform-neutral,
+  installed during assembly.
+- `Templates/project-workspace/templates/session/cross-module-entry.md`
+  and a `## Change History` block in the contract-page template.
+- Cross-module rules in the template's root and module `AGENTS.md`, a
+  skill-install step and check in `ASSEMBLY.md`, and matching updates in
+  sections 02 and 12, `Derivatives/02-practical-adoption-checklist.md`,
+  and `README.md`.
+- Ukrainian translation of all the above under `uk/`.
+
 ## [0.5.0-draft] - 2026-07-24
 
 ### Added
