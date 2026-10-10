@@ -132,6 +132,16 @@ not because the method only works there.
 
 ## Quickstart
 
+**Fastest start:** install the free MIT plugin for Claude Code
+([deterministic-context-routing-plugin](https://github.com/ai-erp-collab/deterministic-context-routing-plugin)):
+
+```text
+/plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin
+/plugin install context-routing@deterministic-context-routing
+```
+
+Or set the workspace up by hand:
+
 1. Copy `Templates/project-workspace/` into your project.
 2. Fill root `idea.md`, then rename `modules/example-module/` and
    `knowledge-base/modules/example-module/` to your first real module.
