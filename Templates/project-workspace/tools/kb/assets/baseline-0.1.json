@@ -1,0 +1,47 @@
+{
+ "comment": "sha256 of every 0.1.x template file (LF and CRLF); a version-0 workspace file with one of these bytes is unedited",
+ "files": {
+  "source-artifacts/tables/processed/README.md": [
+   "2227e5a7530032e91a7fca38905f2f4e0a1d57a4127d548b978769be0fb5c82c",
+   "f69e80d61a59bdb7e2de73bbc85aadfd1d5b6bff20adcf4dffd6b7749d5a6d4e"
+  ],
+  "source-artifacts/tables/raw/README.md": [
+   "54c20268399ffe396a41c0dea1a6ed20010e75c51cabc1bd5c0a2d33620ae295",
+   "e38888f923f5cf04baf84c17d22670b2f0efb794c9b774fdca19478eb15c291e"
+  ],
+  "templates/session/cross-module-entry.md": [
+   "462a7fc84553797ef466f36d21d0887b7b3869cd84d1bdab0195e83310edf2da",
+   "6c997c26a75450a18f832cf9a0809fa0fc3d5ac80b1f114294f8a91b0186a9a9"
+  ],
+  "templates/session/session-state-entry.md": [
+   "13bb65c9f7a13e35f0a704bfe1f61b865e6ca02fbb990f9e271968751e0d1a8b",
+   "16f897b773887dc9170d15df7c0085ac91336e126e3551cd44af6384e8e27061",
+   "48c5bf37a8fcf14683c677d347093d5413648b3f6596cf46d6550e9ffc2d971a",
+   "8771b7bad93b2d48970bdc7febc12fa0b7359dfa36f5c3d788698cddb1937d07"
+  ],
+  "templates/wiki/contract-page.md": [
+   "c092273c562a6e6efadff1618fa2a5be5c4c5dacff9bad118b5be13be04bc83e",
+   "f2c6ae30122b51cc0dc47baf18f0dae372ef008e4b5e0a56b7d0cf11fc6e834d"
+  ],
+  "templates/wiki/module-concept-page.md": [
+   "b76b5cc696504c84d11bcf189fb5612428727164cbc01211ca2a59f4979bd33d",
+   "d5625559111f8079cd80a61917c91fad8445c7c036dea69cf4d208d1b3a6dca8"
+  ],
+  "templates/wiki/table-page.md": [
+   "92e2367b3827b5277b42c557cccdf4446ce2f706c0eaa715dc2d3e6801d1442a",
+   "e54f44a6d25da0722a9e82e5522b70ab76aab0123cd8ef8a161b550eeaaacc95"
+  ],
+  "templates/wiki/usage-flow-page.md": [
+   "5279f32ad5ee348db57f8abcd37e207585c188b350dbdb6ec19f256650d4e8f9",
+   "6b12985f5411861213476771b7e93952569e8216fcd53afcfb16389c01556c32"
+  ],
+  "templates/workflow/design-doc.md": [
+   "52af53b19ef72893d16b03a081271c8b17a85b7f6582288fe16a710b6bf8ed9c",
+   "d2bb64aa1ee678fab9291f90c15dd9a3c74a1cfe4f751b35928f794b253f3d9d"
+  ],
+  "templates/workflow/implementation-plan.md": [
+   "5924fc78e896ebc2ca4802d236a35997c518eb6bf7f6e15a264e570051ae1052",
+   "8b8af0f2fd95d27097eb2fb08f7e78f5cd82b4b0387f65b28fd32a4309a5fc90"
+  ]
+ }
+}

@@ -6,13 +6,13 @@
    - status: draft
    - audience: decision makers, leads, sponsors
    - purpose: explain value, scope, adoption path, and risks in a short format
-   - sources: `00`, `01`, `02`, `10`, `12`
+   - sources: `00`, `01`, `02`, `03`, `10`, `12`, `14`
 
 2. `02-practical-adoption-checklist.md`
    - status: draft
    - audience: implementers adopting the method on one module
    - purpose: convert the methodology into a step-by-step adoption checklist
-   - sources: `03`, `04`, `05`, `10`, `11`, `12`
+   - sources: `03`, `04`, `05`, `07`, `10`, `11`, `12`, `13`, `14`
 
 3. `03-public-article-outline.md`
    - status: draft

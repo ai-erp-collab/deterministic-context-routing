@@ -21,7 +21,31 @@ protocol makes it safe.
    already makes every phase boundary a safe stopping point.
 3. On any session start: read `session_state.md` only to the first
    stop marker, find the recorded phase, and continue from the phase
-   after it. Do not re-read completed phases' inputs.
+   after it. If the latest entry is `Phase 0 started`, repeat Phase 0:
+   the copy was interrupted. Do not re-read completed phases' inputs.
+
+## Existing Workspace? Upgrade Instead
+
+If the target folder already holds a workspace (it has both
+`AGENTS.md` and `modules.md`) that has no `Phase 0 started` entry in
+its `session_state.md`, do not run the phases below. It was built with
+an earlier template. Copy this template's `tools/kb/` into it, then:
+
+1. Run `python tools/kb/kb.py upgrade --dry-run --from <this template folder>`.
+   It prints the plan: files to add or replace, project-edited files
+   (kept; a `<file>.new` is written beside them), the managed block,
+   hook entries, data migrations, legacy `[[...]]` link conversions,
+   links in `AGENTS.md` and session logs that will not open,
+   and questions. Nothing is written.
+2. Show the whole plan to the user, including the link conversions.
+   **ASK** each question it lists (for example evidence folders per
+   module) and **ASK** for approval of the plan.
+3. Run the same command with the answers and `--yes`. It snapshots
+   the workspace first; `kb upgrade --rollback` returns to that state.
+4. Merge every `<file>.new` into its file, keeping the project's edits.
+5. On Codex, tell the user to trust the project hooks with `/hooks`.
+6. Write a `session_state.md` entry with the before/after counts the
+   upgrade printed. Assembly is then complete.
 
 ## Inputs (ASK for any that are missing)
 
@@ -32,14 +56,22 @@ protocol makes it safe.
 
 ## Phase 0 — Copy the template
 
-1. Copy this template folder's contents into the target folder.
+1. Before copying anything, start the log: if the target has no
+   `session_state.md`, copy the template's one and delete its example
+   entry; then add an entry titled `Phase 0 started` at its top, so an
+   interrupted copy is resumed and never mistaken for a finished
+   workspace. Copy the remaining template contents into the target
+   folder, skipping files that already exist there (list them).
 2. Do not copy `ASSEMBLY.md`'s siblings from outside the template, and
    do not modify anything under the source code/docs paths — they are
    read-only inputs throughout assembly.
 3. Verify the copy contains: `AGENTS.md`, `idea.md`, `known_issues.md`,
    `modules.md`, `session_state.md`, `knowledge-base/`,
    `source-artifacts/`, `modules/example-module/`, `templates/`,
-   `skills/`.
+   `skills/`, `tools/kb/kb.py`, `.codex/hooks.json`.
+4. Check that `python --version` (or `python3 --version`, or
+   `py -3 --version`) reports 3.9 or later. If not, **ASK** the user whether to continue without the
+   integrity tool: the workspace still works, but no checks run.
 
 Checkpoint: write the Phase 0 entry per the Continuity Protocol.
 
@@ -74,7 +106,11 @@ runs under the workspace's own rules.
    platform has no skill mechanism, keep the folder and make sure the
    rules file points to the skill file by path. Verify that a fresh
    session can name the `cross-module-owner-api` skill when asked
-   whether another module already has some rule.
+   whether another module already has some rule. On Codex the `kb`
+   skill is already in `.codex/skills/kb/`.
+7. Run `python tools/kb/kb.py upgrade --yes` (it writes `.kb/` and the
+   managed block of the rules file), then `python tools/kb/kb.py doctor`.
+   On Codex, tell the user to trust the project hooks with `/hooks`.
 
 Checkpoint: write the Phase 1 entry.
 
@@ -102,16 +138,20 @@ Checkpoint: write the Phase 2 entry.
    the renamed pair's structure.
 5. Register every module in `modules.md` with its natural-language
    aliases.
+6. **ASK** per module for evidence folders (table exports, library
+   sources, usage examples, documents) and record them as an
+   `evidence:` line after `sources:`; omit the line when there are none.
 
 Checkpoint: write the Phase 3 entry.
 
 ## Phase 4 — Raw material intake
 
-1. Copy the project's documentation artifacts (specs, table exports,
-   user documentation, business requirements) into
-   `source-artifacts/*/raw/`, grouped by the registered modules.
+1. Take in the project's documentation artifacts (specs, table
+   exports, user documentation, business requirements) per module with
+   `python tools/kb/kb.py ingest <path...> --module <Module> --kind <kind>`.
+   It copies them into `source-artifacts/`, records origin and hash in
+   `registry.json`, and regenerates `source-artifacts/INDEX.md`.
 2. Do not curate yet; intake only. Large sets are fine — raw is cheap.
-3. List what was placed where in `source-artifacts/INDEX.md`.
 
 Checkpoint: write the Phase 4 entry.
 
@@ -159,8 +199,9 @@ For one module at a time:
 1. Write the module concept page from `templates/wiki/`'s
    module-concept template, based on that module's raw materials.
 2. Curate the module's most load-bearing artifacts first (a core table,
-   contract, or usage flow), moving each processed source from raw
-   toward processed per the workspace rules. Every item on the
+   contract, or usage flow). Each page names its artifact copy in its
+   `source:` line; the integrity tool then records that artifact as
+   processed. Files stay where intake put them. Every item on the
    module's `inventory.md` must end up on a concept/contract/table
    page, or be marked in `inventory.md` itself as deliberately
    excluded (e.g. internal, deprecated, out of scope) with a one-line
@@ -184,14 +225,20 @@ Confirm each item; fix before finishing if any fails:
 2. Root `idea.md` confirmed by the user.
 3. Every module registered in `modules.md` has both folder pairs, a
    concept page, and at least one curated artifact.
-4. `source-artifacts/INDEX.md` accounts for everything in raw.
+4. `python tools/kb/kb.py check` reports no blocking issues, and its open
+   issues are listed to the user (minor ones, such as evidence still
+   waiting to be processed, are expected after intake).
 5. Every non-obvious curated claim carries a confidence label.
 6. Every line in every module's `inventory.md` is either represented
    on a curated page or explicitly marked excluded with a reason —
    spot-check by grepping a sample of inventory items against the
    curated pages.
-7. The `cross-module-owner-api` skill is installed or referenced by
-   path, and the rules file names it.
+7. The `cross-module-owner-api` and `kb` skills are installed or
+   referenced by path, and the rules file names them. The rules file
+   holds the `<!-- kb:begin -->` block. On Codex the user has trusted
+   the project hooks (`/hooks`); elsewhere the agent's hooks are
+   installed, or the user knows the checks run only through the
+   rules-file lines.
 8. `session_state.md` ends with a final entry: "Assembly complete;
    next action: first real task."
 

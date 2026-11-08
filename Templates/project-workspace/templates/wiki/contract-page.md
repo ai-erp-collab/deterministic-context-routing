@@ -32,8 +32,8 @@ confidence: confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Links
 
-- examples: [[usage/...]]
-- tables: [[tables/...]]
+- examples: [<flow>](../usage/<flow>.md)
+- tables: [<table>](../tables/<table>.md)
 - consumers: <other modules allowed to call this API, or none>
 
 ## Change History

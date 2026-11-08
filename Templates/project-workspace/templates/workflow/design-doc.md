@@ -25,7 +25,7 @@
 ## Verification
 
 - static: <checks>
-- runtime: <checks requiring ERP runtime>
+- runtime: <checks requiring the target runtime>
 
 ## Documentation Updates
 

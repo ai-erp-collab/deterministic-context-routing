@@ -1,7 +1,7 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.6.0-draft](https://img.shields.io/badge/status-v0.6.0--draft-orange)
+![Status: v0.7.0-draft](https://img.shields.io/badge/status-v0.7.0--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
@@ -43,6 +43,12 @@ and no git.
   instead of assumed away. [[3]](#grounded-in)
 - Documentation efforts stall because they're treated as cleanup work after
   the "real" work is done, so they never actually happen.
+- Even a good knowledge base degrades, because agents behave differently
+  from session to session: links tools cannot open, pages missing from
+  indexes, the same table described twice, evidence nobody registered or
+  that gets re-parsed by hand every time. Rules in prose don't stop it,
+  agent self-checks drift with the agent, and manual review costs
+  developer time.
 
 ## The Solution
 
@@ -56,6 +62,14 @@ and no git.
 - **Confidence Labels** — every important claim is tagged `confirmed`,
   `inferred`, `runtime-unverified`, or `blocked-by-access`, so agents and
   humans both know what has actually been checked.
+- **Deterministic Integrity Layer** — a small standard-library tool in
+  the workspace checks links, indexes, evidence tracking, duplicates, and
+  required page sections on agent events (after an edit, at the end of a
+  turn, at session start). Fixes with exactly one correct answer are
+  applied automatically, journaled, and reversible; everything else
+  becomes a numbered issue for the agent. Hooks for Claude Code and
+  Codex, one `kb` skill, an evidence registry with hashes, and an
+  upgrade command with snapshot and rollback for existing workspaces.
 - **Session State ≠ Git** — `session_state.md` carries intent, evidence,
   assumptions, and next action: information Git history was never designed
   to hold, and which stays necessary even in projects with full Git, CI,
@@ -140,17 +154,25 @@ not because the method only works there.
 /plugin install context-routing@deterministic-context-routing
 ```
 
+The plugin (0.2.1 or later) sets up the workspace, installs the integrity
+tool and its hooks, and upgrades a workspace built with an earlier
+template: it previews every change, snapshots first, and can roll back.
+
 Or set the workspace up by hand:
 
 1. Copy `Templates/project-workspace/` into your project.
-2. Fill root `idea.md`, then rename `modules/example-module/` and
+2. With Python 3.9 or later available, run
+   `python tools/kb/kb.py upgrade --yes` once to switch on the integrity
+   tool; on Codex, trust the project hooks with `/hooks`. Without Python
+   the workspace still works, but nothing checks it.
+3. Fill root `idea.md`, then rename `modules/example-module/` and
    `knowledge-base/modules/example-module/` to your first real module.
-3. Write that module's concept using the `templates/wiki/` module-concept
+4. Write that module's concept using the `templates/wiki/` module-concept
    template.
-4. Curate your first table or class contract, and label every non-obvious
+5. Curate your first table or class contract, and label every non-obvious
    claim with a confidence label.
-5. Run one real task from that context, then update `session_state.md`
-   before you stop.
+6. Run one real task from that context, run `python tools/kb/kb.py check`,
+   then update `session_state.md` before you stop.
 
 Prefer to delegate? Hand `Templates/project-workspace/ASSEMBLY.md` to
 your coding agent — it runs these steps phase by phase, checkpoints its

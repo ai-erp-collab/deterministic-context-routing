@@ -5,5 +5,6 @@
   - wiki: `knowledge-base/modules/example-module/`
   - shared wiki: `knowledge-base/shared/`
   - sources: `<source-root>/`, `<usage-example-root>/`
+  - evidence: `<evidence-root>/`
   - artifacts: `source-artifacts/`
   - aliases: example, sample

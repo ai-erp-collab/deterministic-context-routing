@@ -5,5 +5,5 @@
 - Important facts: <durable facts discovered>.
 - Confidence/assumptions: <confirmed, inferred, runtime-unverified, or blocked-by-access claims>.
 - Verification: <checks run and remaining assumptions>.
-- Next useful action: <one next step>.
+- Next useful action: <one next step, concrete enough to start without asking>.
 <!-- AGENT-SESSION-STOP -->

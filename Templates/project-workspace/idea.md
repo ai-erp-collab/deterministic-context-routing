@@ -12,7 +12,7 @@ plans are created.
 
 ## Product Purpose
 
-- <what business problem this ERP project or workspace solves>
+- <what problem this project or workspace solves>
 
 ## Audience And Users
 

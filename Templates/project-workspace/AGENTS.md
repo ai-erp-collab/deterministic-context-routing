@@ -17,6 +17,10 @@
 - Update root `session_state.md` only as a compact module activity index.
 - When full automated testing is impossible, document static checks and remaining runtime assumptions.
 - Keep `session_state.md` even when Git exists; Git records file history, while session state records task intent, evidence, assumptions, verification, and next action.
+<!-- kb:begin -->
+- Read source files larger than 50 KB through `python tools/kb/kb.py outline <file>`, not directly.
+- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`skills/kb/SKILL.md`).
+<!-- kb:end -->
 
 ## Project-Specific Rules
 
@@ -27,7 +31,6 @@
   - Runtime access: define local or target-environment checks, or state that runtime behavior must be marked runtime-unverified.
   - Static/guardrail checks: define required scans and commands.
 - Example: define privacy, data access, encoding, or deployment constraints here.
-- Example: define how raw artifacts move from raw to processed here.
 
 ## Bootstrap Note
 

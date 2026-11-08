@@ -7,6 +7,8 @@ After this section, the reader can:
 
 - Explain why usage flows are the bridge between isolated contracts and real ERP behavior.
 - Decide when to create a module-specific usage flow and when to create a shared pattern.
+- Tell a recipe (a reusable platform technique) from an owner contract (one module's business rule), and give each its home.
+- Use the ready-solutions index to find an existing solution before writing a new one.
 - Write a usage flow that names steps, actors, calls, data, statuses, checks, side effects, and uncertainty.
 - Link usage flows back to module concepts, table contracts, class contracts, source evidence, and open questions.
 - Keep scenario documentation small enough to support task intake.
@@ -21,6 +23,18 @@ A usage flow is the curated page for that scenario. It should answer: what start
 
 A pattern is different. A pattern is reusable shape rather than one business scenario. Examples include temp-table editor behavior, status transition handling, access-filter composition, formula evaluation, document posting hooks, or report preparation. If the same shape appears across modules, it belongs in shared knowledge. If it is specific to one module, it belongs near that module's usage flows.
 
+### Recipes And Owner Contracts
+
+Reuse comes in two kinds that look alike and must be kept apart. A recipe is a platform technique: how to do something with the platform itself, such as building a temporary editor table, composing an access filter, or calling a reporting service. Any module can apply it after adapting the parameters. An owner rule is a module's business rule: how this module decides who sees which budget unit, or which statuses allow posting. Another module must not copy it; it calls the owner module's API, as section 08 describes for cross-module rules. A business rule written down as a recipe gets copied into consumers and drifts; a platform technique hidden inside one module's contract gets rediscovered by every other module.
+
+A recipe lives in `knowledge-base/shared/recipes/<domain>/<slug>.md`. Its header records where the technique came from (`donor_file`, `donor_symbol`), a hash of the donor symbol's body (`symbol_hash`), the module that owns the donor code (`owner_module`), and a `status`. Its body states the problem, the signatures, a snippet with module constants replaced by parameters, adaptation notes, and a link to the donor evidence.
+
+A recipe is created only through the promotion rule of section 03: a candidate registered at session close, unchanged for the configured number of later closes, and promoted on the user's yes. The command `kb recipe promote` writes the page and refuses to overwrite an existing recipe. After promotion, the integrity check compares the recorded hash with the donor code and reports drift when the donor changes or disappears, so a recipe never silently describes code that no longer exists.
+
+### The Ready-Solutions Index
+
+Before solving a problem, an agent should know whether the project has already solved it. The ready-solutions index, `knowledge-base/shared/patterns/INDEX.md`, has one row per solution: the task it solves, the pattern or recipe page, and the owner module. It points only to curated shared pages, never into a module's code. When the agent needs to read the donor module's code itself, it asks the user first: the owner module may be under active change, may belong to another team, or may contain rules that must not leak into a consumer.
+
 Usage flows and patterns are context-routing devices. They should not copy large code bodies or raw table exports. They should summarize the scenario and link to deeper evidence only when the current task needs it. Their job is to let a workflow ask, "Which behavior am I changing, which contracts are involved, and what must be checked?"
 
 ## Reproducible Procedure
@@ -31,8 +45,10 @@ Usage flows and patterns are context-routing devices. They should not copy large
    - Do not create a flow only because a method exists; that belongs in a class contract.
 
 2. Choose the right home.
+   - Check the ready-solutions index `knowledge-base/shared/patterns/INDEX.md` first; reuse a listed pattern or recipe instead of writing a new one.
    - Put module-specific flows in the active module wiki or the module's established usage area.
    - Put reusable cross-module patterns in shared knowledge.
+   - Put a platform technique in a recipe, through the promotion rule; leave a module's business rule in its owner contract and reach it through the owner API.
    - Link from the module concept when the flow is part of the module's baseline behavior or common user intent.
 
 3. Name the flow in business language.
@@ -65,6 +81,8 @@ Usage flows and patterns are context-routing devices. They should not copy large
 ## Required Artifacts
 
 - Usage flow page for a module-specific scenario, or shared pattern page for reusable cross-module behavior.
+- Recipe page `knowledge-base/shared/recipes/<domain>/<slug>.md` with `donor_file`, `donor_symbol`, `symbol_hash`, `owner_module`, and `status`, for each promoted platform technique.
+- Ready-solutions index `knowledge-base/shared/patterns/INDEX.md`: task, page, owner module.
 - Links to relevant module concept terms.
 - Links to table contracts and class contracts involved in the flow.
 - Ordered steps with triggers, checks, data, side effects, statuses, and errors when known.
@@ -96,6 +114,10 @@ That flow lets the next task start from the scenario. The agent can then follow 
 - Omitting side effects, validations, messages, statuses, or permissions.
 - Hiding runtime uncertainty behind confident prose.
 - Leaving the flow unlinked from module terms, table contracts, and class contracts.
+- Writing a module's business rule as a recipe: consumers copy it and the copies drift from the owner.
+- Promoting a technique the moment it first works: the shared recipe describes code that is still changing.
+- Pointing the ready-solutions index into module code: consumers start reading and copying another module's internals.
+- Ignoring recipe drift reports: the recipe describes a donor that changed or no longer exists.
 
 ## Assumptions And Runtime Limits
 
@@ -108,5 +130,6 @@ That flow lets the next task start from the scenario. The agent can then follow 
 
 - `05-module-concept-and-language.md`: defines module terms and intent patterns that should link to important flows.
 - `07-tables-as-contracts.md`: defines the data contracts used inside flows.
-- `08-libraries-and-class-contracts.md`: defines the behavior contracts used inside flows.
+- `03-knowledge-system.md`: defines the promotion rule with a cooldown that creates recipes.
+- `08-libraries-and-class-contracts.md`: defines the behavior contracts used inside flows and the owner API for cross-module rules.
 - `10-agentic-workflow-with-superpowers.md`: downstream section for using flows during disciplined agent task work.

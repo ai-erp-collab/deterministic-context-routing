@@ -10,6 +10,8 @@ After this section, the reader can:
 - Use module language to map a human request to tables, documents, classes, settings, roles, and verification limits.
 - Decide when a task belongs to the active module, a neighboring module, or project-level context.
 - Recognize why a module concept can help the agent challenge unclear or defective business logic.
+- Place a term in the right home: the module concept for one module's terms, a shared glossary card for terms several modules use.
+- Look a term up before asking the user, and record the answer so the next session finds it.
 
 ## Core Explanation
 
@@ -49,6 +51,14 @@ A strong module concept includes:
 
 The module concept should be written in business language first. Technical links are still necessary, but they come after the concept gives them meaning. A table name without business meaning is only a string. A business term without technical anchors is only an intention. The module concept connects both sides.
 
+### Shared Terms And Lookup Before Asking
+
+Some terms belong to no single module. A document type, a status, or an abbreviation can be used by several modules with the same meaning. If each module concept explains it again, the explanations drift apart, and an agent working in one module cannot find what another module already learned. Such a term gets one shared glossary card: a small page in `knowledge-base/shared/glossary/<slug>.md` that records the term, its meaning, its aliases (abbreviations, transliterations, other spellings), its domain, the module that owns it, related pages, and a confidence label. Terms used by one module stay in that module's concept page. Every curated page can also carry an `aliases:` line with the names people actually type.
+
+These three sources (concept terms, glossary cards, page aliases) feed one lookup command of the integrity layer introduced in section 03: `kb resolve <term>`. It matches exact names and aliases regardless of case and separators, matches across Cyrillic and Latin spellings, tolerates small spelling differences, and returns a short ranked list of pages with the reason each one matched. The agent does not read a large generated dictionary; it asks and receives a few lines. One alias that points to two different pages is not resolved silently; the check reports it as a possible duplicate.
+
+The order of steps for an unknown term is therefore fixed: look it up first, then search the evidence, and only then ask the user. Whatever the answer, it is written down at once (a concept term or a glossary card), and the write hook reindexes the page, so the next session finds the term without asking again. A meaning is never guessed into the knowledge base: an unconfirmed reading is either labeled `inferred` or left as an open question.
+
 Every non-trivial feature should either use the module concept or update it. If a task discovers a new invariant, synonym, role, status rule, boundary, or dependency, that discovery belongs in module memory. Otherwise the next agent will repeat the same interpretation work.
 
 ## Reproducible Procedure
@@ -71,28 +81,35 @@ Every non-trivial feature should either use the module concept or update it. If 
    - Record primary terms, synonyms, abbreviations, and multilingual variants.
    - Map each important term to known technical objects when that mapping exists.
    - Mark unknown mappings as open questions instead of guessing.
+   - Move a term that several modules use into a shared glossary card instead of repeating it in each concept.
 
-5. Record core entities and extension points.
+5. Resolve unknown terms before asking.
+   - Run `kb resolve "<term>"`; add `--kind term` to see glossary cards only.
+   - On a confident hit, read that page and continue.
+   - With no confident hit, look for the meaning in the evidence (table exports, documents, code comments); ask the user only when the evidence does not settle it.
+   - Record the answer in the concept page or a glossary card with its aliases and a confidence label.
+
+6. Record core entities and extension points.
    - Name important documents, directories, tables, settings, statuses, roles, groups, methods, UI actions, formulas, and workflow states.
    - Link to existing wiki pages, contract pages, source examples, or artifact indexes.
 
-6. Capture invariants and constraints.
+7. Capture invariants and constraints.
    - Write rules that must remain true across changes.
    - Distinguish business invariants from technical constraints.
    - Mark runtime-only constraints explicitly when they cannot be confirmed statically.
 
-7. Add intent patterns.
+8. Add intent patterns.
    - Record common user request shapes.
    - For each pattern, name likely terms, technical objects, and verification needs.
    - Include ambiguity rules when a phrase can mean more than one thing.
 
-8. Use the module concept during agentic workflow intake.
+9. Use the module concept during agentic workflow intake.
    - Start from the user's words.
    - Map words to module terms.
    - Map terms to technical objects.
    - Identify missing evidence, ambiguity, and runtime assumptions.
 
-9. Update the module concept after meaningful discoveries.
+10. Update the module concept after meaningful discoveries.
    - Add new terms, mappings, boundaries, invariants, and open questions.
    - Keep detailed evidence in the appropriate wiki, contract, table, or usage page.
    - Keep the module concept as an entry point, not a raw evidence dump.
@@ -102,6 +119,8 @@ Every non-trivial feature should either use the module concept or update it. If 
 - Module concept page in the active module wiki.
 - Module purpose and boundaries.
 - Module terminology dictionary.
+- Shared glossary cards `knowledge-base/shared/glossary/<slug>.md` for terms several modules use, made from the template's glossary-term page.
+- `aliases:` lines on curated pages.
 - List of primary entities and technical anchors.
 - Module invariants and constraints.
 - Intent patterns and ambiguity rules.
@@ -135,6 +154,9 @@ The agent can now ask a focused question if "see" is ambiguous, inspect the smal
 - Treating inferred mappings as confirmed: a plausible term-to-table relation becomes a false contract.
 - Letting the module concept become a raw dump: the entry point becomes too expensive to read.
 - Failing to update the concept after a task: durable language remains behind actual module understanding.
+- Asking the user the same term twice: the first answer stayed in a chat or a session note instead of a concept term or glossary card.
+- Repeating a shared term in every module concept: the copies drift and contradict each other.
+- Guessing a meaning into a glossary card: the next session trusts it as confirmed.
 
 ## Assumptions And Runtime Limits
 
@@ -146,7 +168,7 @@ The agent can now ask a focused question if "see" is ambiguous, inspect the smal
 ## Related Notes
 
 - `01-why-this-method-exists.md`: explains the necessary-and-sufficient context goal.
-- `03-knowledge-system.md`: defines module memory and shared memory.
+- `03-knowledge-system.md`: defines module memory and shared memory, and the integrity layer that provides the lookup command.
 - `04-workspace-bootstrap.md`: defines the module registry and wiki roots that host module concepts.
 - `06-knowledge-acquisition.md`: explains how missing module knowledge is collected and classified.
 - `10-agentic-workflow-with-superpowers.md`: downstream section for applying module language to a concrete request through a disciplined agent workflow.

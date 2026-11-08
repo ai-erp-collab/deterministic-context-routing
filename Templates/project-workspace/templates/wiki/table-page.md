@@ -18,6 +18,10 @@ confidence: confirmed|inferred|runtime-unverified|blocked-by-access
 
 - `<FIELD>` <type>(len,dec) key|null|required: meaning; codes if known; confidence: <label>.
 
+## Relations
+
+- <other table>: <join fields>; confidence: <label>
+
 ## Evidence
 
 - <artifact, source example, user document, or runtime observation>
@@ -28,5 +32,5 @@ confidence: confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Links
 
-- used-by: [[usage/...]]
-- related: [[tables/...]]
+- used-by: [<flow>](../usage/<flow>.md)
+- related: [<table>](../tables/<table>.md)

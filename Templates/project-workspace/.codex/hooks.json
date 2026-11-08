@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f tools/kb/kb.py ] || exit 0; PY=; for c in python python3 'py -3'; do $c -c 'import sys;sys.exit(sys.version_info<(3,9))' >/dev/null 2>&1 && { PY=$c; break; }; done; [ -n \"$PY\" ] || exit 0; $PY tools/kb/kb.py hook post-write",
+            "commandWindows": "cmd /d /c if exist tools\\kb\\hook.cmd tools\\kb\\hook.cmd post-write",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f tools/kb/kb.py ] || exit 0; PY=; for c in python python3 'py -3'; do $c -c 'import sys;sys.exit(sys.version_info<(3,9))' >/dev/null 2>&1 && { PY=$c; break; }; done; [ -n \"$PY\" ] || exit 0; $PY tools/kb/kb.py hook stop",
+            "commandWindows": "cmd /d /c if exist tools\\kb\\hook.cmd tools\\kb\\hook.cmd stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f tools/kb/kb.py ] || exit 0; PY=; for c in python python3 'py -3'; do $c -c 'import sys;sys.exit(sys.version_info<(3,9))' >/dev/null 2>&1 && { PY=$c; break; }; done; [ -n \"$PY\" ] || exit 0; $PY tools/kb/kb.py hook session-start",
+            "commandWindows": "cmd /d /c if exist tools\\kb\\hook.cmd tools\\kb\\hook.cmd session-start",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

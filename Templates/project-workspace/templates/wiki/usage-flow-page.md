@@ -1,8 +1,8 @@
 # <Scenario>
 
 source: <example or module path>
-contracts: [[contracts/...]]
-tables: [[tables/...]]
+contracts: [<contract>](../contracts/<contract>.md)
+tables: [<table>](../tables/<table>.md)
 status: confirmed|partial|uncertain
 confidence: confirmed|inferred|runtime-unverified|blocked-by-access
 

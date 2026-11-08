@@ -1,6 +1,6 @@
 # Project Workspace Template
 
-This folder is a copyable starter kit for a file-based ERP agent workspace.
+This folder is a copyable starter kit for a file-based agent workspace on any codebase; large proprietary ERP is the proof case.
 
 Copy these files into a new workspace, then replace placeholders such as
 `<Project>`, `<Module>`, `<module-path>`, and `<source-root>` with project
@@ -18,12 +18,20 @@ values. Keep project-specific rules in clearly marked sections.
 - `docs/superpowers/plans/`: implementation plans.
 - `knowledge-base/shared/`: reusable cross-module knowledge.
 - `knowledge-base/modules/example-module/`: example module wiki root.
-- `source-artifacts/`: raw and processed source evidence.
+- `source-artifacts/`: copies of source evidence. `registry.json` is the ledger (origin path, hash,
+  status); `INDEX.md` is generated from it. Files never move after intake: `raw` or `processed` is
+  a status in the registry, not a folder change.
+- `tools/kb/`: the knowledge-base integrity tool (`python tools/kb/kb.py <command>`, Python 3.9 or
+  later, standard library only). Code only: an upgrade replaces it.
+- `.kb/`: the tool's project data (config, table-export profiles, journal of automatic edits,
+  lookup index). Created by `python tools/kb/kb.py upgrade --yes`; an upgrade never overwrites it.
+- `.codex/hooks.json`: Codex hooks that run the tool's checks after edits, at stop, and at
+  session start.
 - `modules/example-module/`: example module idea, instructions, and restart memory.
-- `templates/wiki/`: module concept, table, contract, and usage-flow page templates.
+- `templates/wiki/`: module concept, table, contract, usage-flow, and glossary-term page templates.
 - `templates/workflow/`: design and implementation-plan templates.
 - `templates/session/`: session-state entry templates, including the cross-module entry left in an owner module.
-- `skills/`: platform-neutral agent skills; `cross-module-owner-api` handles work that reaches from the active module into another module. Install them where your agent platform loads skills.
+- `skills/`: platform-neutral agent skills; `cross-module-owner-api` handles work that reaches from the active module into another module; `kb` resolves what the integrity tool reports and holds its procedures. Install them where your agent platform loads skills (a Codex copy of `kb` ships in `.codex/skills/kb/`).
 
 ## Adapting the Template
 

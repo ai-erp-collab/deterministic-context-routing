@@ -95,10 +95,9 @@ These labels keep the agent honest. They also help future work: a runtime-unveri
    - Open questions stay visible until resolved.
 
 7. Maintain artifact lifecycle when new exports are found.
-   - Put newly found XML, CSV, TXT, or similar table/source exports in the raw artifact area.
+   - Register newly found XML, CSV, TXT, or similar table/source exports as evidence copies in the artifact area (`kb ingest`, section 13).
    - Recognize and review the artifact before treating it as curated knowledge.
-   - Move processed artifacts only after related wiki pages are created or refreshed.
-   - Update the artifact index.
+   - Mark an artifact processed only after related wiki pages are created or refreshed; the status lives in the registry and files are not moved.
 
 8. Feed the current task with bounded context.
    - Bring forward only the facts needed for design, implementation, or verification.

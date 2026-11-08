@@ -36,6 +36,6 @@ confidence: confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Links
 
-- tables: [[...]]
-- usage: [[...]]
-- contracts: [[...]]
+- tables: [<table>](tables/<table>.md)
+- usage: [<flow>](usage/<flow>.md)
+- contracts: [<contract>](contracts/<contract>.md)

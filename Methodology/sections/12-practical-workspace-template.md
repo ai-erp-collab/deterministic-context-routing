@@ -21,11 +21,12 @@ The practical starting point is not a theory of documentation layers. It is a wo
 
 The starter template should be copied from real working artifacts whenever possible. Universal pieces can be reused almost as-is. Project-specific pieces should be clearly marked as examples, not rules for every team. In this project, encoding checks, absence of git, absent compiler/runtime verification, table export folders, and module aliases are project-specific. The pattern of having these rules is universal; the exact rules are not.
 
-A useful starter workspace has four jobs:
+A useful starter workspace has six jobs:
 
 - orientation: resolve active module and local rules;
 - memory: preserve compact restart context and durable knowledge;
-- evidence: keep raw and processed source artifacts auditable;
+- evidence: keep every source artifact copied, registered, and auditable;
+- integrity: keep links, indexes, and the evidence registry true without relying on the agent's memory (the deterministic integrity layer from section 03);
 - confidence: label important claims as confirmed, inferred, runtime-unverified, or blocked-by-access;
 - workflow integration: give Superpowers or an equivalent workflow enough project context to plan, implement, verify, and update documentation.
 
@@ -47,21 +48,33 @@ workspace/
   knowledge-base/
     INDEX.md
     shared/
+      glossary/    # cross-module term cards (created on first use)
+      recipes/     # promoted platform techniques (created on first use)
+      patterns/
+        INDEX.md   # ready-solutions index (created on first use)
     modules/
       <module>/
   source-artifacts/
-    INDEX.md
-    tables/
-      raw/
-      processed/
+    registry.json  # evidence registry: the source of truth (written by the tool)
+    INDEX.md       # generated from registry.json for agents to read
+    <kind>/raw/<module>/   # evidence copies; files never move after intake
   skills/
     cross-module-owner-api/
       SKILL.md
-  <module>/
-    AGENTS.md
-    idea.md      # bootstrap input, not recurring memory
-    session_state.md
-    docs/
+    kb/
+      SKILL.md     # the one KB skill; hook messages point here
+  tools/
+    kb/            # integrity tool code: replaced on upgrade, never holds project data
+  .kb/             # integrity tool data: config, layout profiles, journal, lookup index
+  .codex/
+    hooks.json     # Codex hooks (Claude Code gets its hooks from the plugin)
+    skills/kb/     # Codex copy of the kb skill
+  modules/
+    <module>/
+      AGENTS.md
+      idea.md      # bootstrap input, not recurring memory
+      session_state.md
+      docs/
 ```
 
 For a documentation-only methodology module, this project also uses:
@@ -80,6 +93,14 @@ Methodology/
 
 That second shape is project-specific. It is useful when the documentation itself is the product and must be assembled from source sections.
 
+### Tool Code And Project Data
+
+The integrity layer keeps code and data apart on purpose. `tools/kb/` holds the tool and nothing the project wrote; an upgrade may replace it whole. `.kb/` holds what belongs to the project: `config.json` (thresholds, language families, accepted duplicates, `link_ignore`, applied migrations, the workspace version), `track.ignore` (files excluded from evidence tracking), `profiles/` (table-export layouts), `journal/` (every automatic edit, for undo), `state.json`, and `entities.json` (the generated lookup index). An upgrade never overwrites `.kb/`. A project that edits a shipped file outside these folders keeps its edit; the upgrade writes the new version beside it as `<file>.new` (section 14).
+
+### Links Open By Path
+
+Every link in the knowledge base must open as a file by its path, relative to the folder of the page that contains it. This is the link form that both agents and tools can follow; a link that only a wiki viewer can resolve (`[[Page Name]]`) leaves the agent guessing which file is meant. The rule applies to Markdown links and to paths written in backticks, because agents write routes both ways. The integrity check verifies it across the knowledge base, the rules files (`AGENTS.md` at the workspace root and in each module), and each `session_state.md` down to its first stop marker; older history is left alone because files it names may have been renamed since, and history is not rewritten. In rules files and logs, a bare file name in backticks (`concept.md`) is read as prose that names a kind of file, not as a route, and a broken link there is never repaired by guessing from file names. A link that intentionally points outside the workspace, for example into another repository, is excluded with a glob in `link_ignore` in `.kb/config.json`, matched against the link as written (`*other-repo/*`), or with `<!-- kb:ignore-link -->` on the same line. An existing wiki that uses `[[...]]` links is migrated once, with a preview first (section 14).
+
 ## Root Instructions Template
 
 Root `AGENTS.md` should define universal behavior first:
@@ -96,6 +117,7 @@ Root `AGENTS.md` should define universal behavior first:
 - Keep module-specific durable knowledge in the module wiki.
 - Keep reusable platform or cross-module knowledge in shared knowledge.
 - Keep raw source artifacts separate from curated knowledge.
+- Keep links openable by path, relative to the page that contains them.
 - Work in one active module. Reach into another module only when the user asks about it (read only) or commands a change there; then follow the `cross-module-owner-api` skill.
 - Never copy another module's rule into the active module; call its owner API. Every write into another module leaves a mark in that module.
 - Update the active module `session_state.md` after every non-conversational task.
@@ -103,6 +125,17 @@ Root `AGENTS.md` should define universal behavior first:
 - When full automated testing is impossible, document static checks and remaining runtime assumptions.
 - Keep `session_state.md` even when Git exists; Git records file history, while session state records task intent, evidence, assumptions, verification, and next action.
 ```
+
+The integrity layer adds two more lines, kept inside a managed block that its upgrade command maintains (text outside the block is never touched):
+
+```markdown
+<!-- kb:begin -->
+- Read source files larger than 50 KB through `python tools/kb/kb.py outline <file>`, not directly.
+- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`skills/kb/SKILL.md`).
+<!-- kb:end -->
+```
+
+These lines are the fallback for an agent whose hooks do not run; with hooks, the same checks happen on events.
 
 The two cross-module lines stay short on purpose: they are read at every session start, while the full procedure from `10-agentic-workflow-with-superpowers.md` lives in the skill and is loaded only when a task actually reaches into another module.
 
@@ -174,11 +207,12 @@ The module `session_state.md` is more detailed than the root one, but it is stil
   - wiki: `<module-wiki-root>/`
   - shared wiki: `<shared-wiki-root>/`
   - sources: `<source-root>/`, `<example-source-root>/`
+  - evidence: `<evidence-root>/`
   - artifacts: `<artifact-root>/`
   - aliases: <natural language aliases>
 ```
 
-This is the file that turns natural language into paths. Keep aliases practical: names users actually type, abbreviations, and domain nicknames.
+This is the file that turns natural language into paths. The `evidence:` field lists the folders where outside material for the module lands: table exports, library sources, usage examples, documents. Every file under an evidence folder must have a row in the evidence registry; a module's own code under `path` and `sources` is not tracked. The integrity tool reads module roots only from this file and never guesses a module from a folder name. Keep aliases practical: names users actually type, abbreviations, and domain nicknames.
 
 ## Required Templates
 
@@ -188,6 +222,7 @@ At minimum, create templates for:
 - table page;
 - class or function contract page;
 - usage flow page;
+- glossary term card;
 - design doc;
 - implementation plan;
 - session-state entry;
@@ -201,13 +236,13 @@ This project stores the copyable project-workspace templates in `Methodology/Tem
 
 This project also ships a copyable project workspace package in `Methodology/Templates/project-workspace/`. It contains root and module `idea.md` files, root starter files, one example module, knowledge roots, source artifact folders, workflow folders, and reusable page templates grouped into `wiki`, `workflow`, and `session` template folders. Treat it as a starting point to adapt, not as a finished project configuration.
 
-The package also carries a `skills/` folder with one skill, `cross-module-owner-api`, which runs the cross-module procedure from `10-agentic-workflow-with-superpowers.md`: question or command mode, the fixed lookup order, the owner API, the link left in the consumer, and the mark left in the owner. The folder is platform-neutral; during assembly the skill is installed wherever the target agent platform loads skills, or referenced by path from the rules file when the platform has no skill mechanism.
+The package also carries the integrity tool (`tools/kb/`), Codex hooks (`.codex/hooks.json`), and a `skills/` folder with two skills. The `kb` skill is where hook messages send the agent: it routes from a situation (an issue to resolve, a large file, new evidence, a table export, an unknown term, a recipe candidate, an upgrade) to one short reference file. The `cross-module-owner-api` skill runs the cross-module procedure from `10-agentic-workflow-with-superpowers.md`: question or command mode, the fixed lookup order, the owner API, the link left in the consumer, and the mark left in the owner. The folder is platform-neutral; during assembly the skill is installed wherever the target agent platform loads skills, or referenced by path from the rules file when the platform has no skill mechanism.
 
 The root of `Methodology/Templates/` is reserved for templates used to produce this methodology itself, such as `section-contract.md` and `section-dod.md`. Those are product-specific templates for writing this book from section files. They are not required for every ERP project unless that project also produces assembled documentation from source sections.
 
 ## Agent-Delegated Assembly
 
-The copyable package also includes `ASSEMBLY.md`: a bootstrap script written for an agent to execute, not a human to follow by hand. Hand it to a coding agent along with the target project's code and documentation, and it works through eight phases in order — copy the template, wire the continuity protocol into the workspace's own injected rules file, capture and confirm the project idea, propose and register modules, intake raw material, build a flat per-module inventory, curate against that inventory, then verify and hand off — checkpointing progress in `session_state.md` after every phase so a session restart at any point picks up exactly where it left off. Every phase names which decisions are `ASK` items the agent must never resolve on its own: capability profile, project-idea confirmation, module boundaries.
+The copyable package also includes `ASSEMBLY.md`: a bootstrap script written for an agent to execute, not a human to follow by hand. Hand it to a coding agent along with the target project's code and documentation, and it works through eight phases in order (installing the integrity layer on the way; given a workspace that already exists, it upgrades it instead, as section 14 describes) — copy the template, wire the continuity protocol into the workspace's own injected rules file, capture and confirm the project idea, propose and register modules, intake raw material, build a flat per-module inventory, curate against that inventory, then verify and hand off — checkpointing progress in `session_state.md` after every phase so a session restart at any point picks up exactly where it left off. Every phase names which decisions are `ASK` items the agent must never resolve on its own: capability profile, project-idea confirmation, module boundaries.
 
 The inventory phase (Phase 5) exists for a specific, confirmed reason: a curator that moves straight from raw intake to selective curation reliably captures too little for the resulting pages to support real task work — interactive validation runs confirmed this concretely. Capturing everything unfiltered first, one flat inventory page per module, then curating against that inventory as a completeness checklist, closes that gap. This phase is not optional; skipping it re-introduces the exact under-capture problem it exists to fix.
 
@@ -250,10 +285,11 @@ Do this by hand using the steps below, or hand `Templates/project-workspace/ASSE
    - Keep templates short enough to be reused, not polished into prose essays.
    - Add the `cross-module-owner-api` skill and install it where the agent platform loads skills.
 
-8. Add artifact lifecycle folders.
-   - Create raw and processed source artifact areas.
-   - Create an artifact index.
-   - State when raw artifacts may move to processed.
+8. Add the evidence registry and the integrity layer.
+   - Add an `evidence:` field for each module in `modules.md`.
+   - Install `tools/kb/`, the `kb` skill, and the hooks for the agent in use; run `python tools/kb/kb.py upgrade --yes` once to write `.kb/` and the managed block, then `python tools/kb/kb.py doctor` to record the available parsers.
+   - Register evidence with `kb ingest` instead of copying it by hand; `source-artifacts/INDEX.md` is generated from the registry.
+   - Track progress by registry status (`raw`, then `processed` once a curated page names the copy); never move evidence files.
 
 9. Add project-specific guardrails.
    - Encoding rules, SQL/runtime constraints, proprietary access limits, build/test limits, privacy rules, available tooling, or absent tooling belong here.
@@ -273,7 +309,8 @@ Do this by hand using the steps below, or hand `Templates/project-workspace/ASSE
 - At least one module `AGENTS.md`.
 - At least one module `session_state.md`.
 - Shared and module knowledge roots.
-- Raw and processed source artifact roots plus artifact index.
+- Evidence registry `source-artifacts/registry.json` and the generated `source-artifacts/INDEX.md`.
+- Integrity tool `tools/kb/`, its data folder `.kb/`, the `kb` skill, and hooks for the agent in use.
 - Starter page templates.
 - Copyable starter workspace package when publishing the methodology.
 - Verification or guardrail scripts when the project requires them.
@@ -310,6 +347,10 @@ That split is the pattern to copy: keep the routing structure universal, and lab
 - Omitting module aliases, causing natural-language requests to miss the right path.
 - Skipping explicit starting intent, causing the first dialogue to start from files instead of business purpose.
 - Keeping raw exports in the wiki instead of source artifact folders.
+- Writing links that only a wiki viewer can open: agents and tools cannot follow them, and routing quietly breaks.
+- Storing project data in `tools/kb/`: the next upgrade replaces it.
+- Moving evidence files between `raw` and `processed` folders: links to the copy break; the status belongs in the registry.
+- Leaving `evidence:` out of `modules.md`: outside material lands in module folders untracked.
 - Shipping templates that the guide never explains.
 - Explaining artifacts in the guide that do not exist in the starter kit.
 - Copying the starter workspace without replacing placeholders and project-specific examples.

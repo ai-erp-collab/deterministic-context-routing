@@ -7,6 +7,53 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.7.0-draft] - 2026-11-08
+
+### Added
+
+- The knowledge-base integrity layer, named as a problem and a solution.
+  `Methodology/sections/03-knowledge-system.md`: "Knowledge-Base
+  Degradation" (agents behave differently between sessions, so links,
+  indexes, evidence tracking, and duplicate pages decay; prose rules,
+  agent self-checks, and manual review do not stop it), "The
+  Deterministic Integrity Layer" (code checks mechanical properties on
+  agent events, applies only fixes with one correct answer, journals
+  every edit, and hands judgment calls to the agent), and "Promotion
+  With A Cooldown" (a technique is shared only after its code stayed
+  unchanged for a set number of sessions and the user agreed).
+- Section 05: shared glossary cards and the lookup-before-asking flow
+  (`kb resolve`). Section 07: required `Keys`/`Fields`/`Relations`, one
+  page per table, and table-export layout profiles registered once
+  (`kb table`, `kb table learn`). Section 08: outline-first reading of
+  large files and parser tiers. Section 09: recipes versus owner
+  contracts and the ready-solutions index. Section 12: links open by
+  path, `tools/kb/` code versus `.kb/` data, `evidence:` in
+  `modules.md`, the updated starter tree. Section 13: evidence copied
+  with a hash into a registry, checked completeness, the processed rule,
+  and the numbered issue queue. Section 14: hooks per agent with a
+  fallback, the fix policy, migrating an existing wiki, and upgrading a
+  workspace across versions with snapshot, manifest, managed blocks,
+  numbered migrations, and rollback.
+- `Templates/project-workspace/`: the integrity tool `tools/kb/`, the
+  `kb` skill (and its Codex copy), Codex hooks, the glossary-term page
+  template, and an upgrade path in `ASSEMBLY.md` for a workspace that
+  already exists.
+- `Derivatives/01-executive-brief.md` and
+  `Derivatives/02-practical-adoption-checklist.md`: the integrity layer
+  in the value case and in the adoption steps.
+- `README.md`: the degradation problem, the integrity layer, and the
+  plugin (0.2.1 or later) as the fastest start.
+
+### Changed
+
+- Evidence files are no longer moved from `raw` to `processed` folders;
+  `raw` and `processed` are statuses in the evidence registry
+  (sections 03, 04, 06, 07, 12, 13).
+- Checking no longer means "change nothing the user did not name": fixes
+  with exactly one correct answer are applied automatically, journaled,
+  and reversible; everything else is proposed as a numbered issue
+  (sections 03, 13, 14).
+
 ## [0.6.0-draft] - 2026-09-26
 
 ### Added

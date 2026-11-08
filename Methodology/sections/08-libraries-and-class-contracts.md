@@ -10,6 +10,7 @@ After this section, the reader can:
 - Write a contract page with purpose, API shape, inputs, outputs, side effects, errors, dependencies, and examples.
 - Link behavior contracts to affected tables, usage flows, module terms, and runtime assumptions.
 - Avoid copying large code bodies into curated memory.
+- Read a source file that is too large for one read through its outline first, then only the needed symbols.
 - Decide which module owns a rule that another module needs, and expose it through an owner API instead of copying it into the consumer.
 
 ## Core Explanation
@@ -23,6 +24,16 @@ This distinction is important in proprietary ERP work because behavior is often 
 A contract page should be created or refreshed when a code unit is reusable, externally called, module-defining, risky, or hard to infer from local code. Private helpers do not always need contract pages. But a private helper can still deserve documentation if it expresses an important module rule. In that case, it may belong in a usage page or module concept instead of being presented as a stable public API.
 
 The contract page is also a context-routing entry point. It should summarize behavior and link to source evidence, table pages, usage flows, and examples. It should not copy large code bodies. The goal is to let future work understand the behavioral contract before deciding whether deeper source reading is needed.
+
+A contract page has two required sections, `Purpose` and `Signature`; the integrity check from section 03 reports a page marked `kind: class` or `kind: function` that lacks either one.
+
+### Large Files: Outline First
+
+Library sources are often too large to read in one pass. An agent that reads such a file in fragments loses the overall shape: it sees a call before the definition, misses an overload, or concludes that a member does not exist because it was in an unread part. Reading the whole file instead fills the context with bodies the task does not need.
+
+The rule is outline first. The command `kb outline <file>` prints the file's skeleton: types, members, and signatures with line numbers, with bodies skipped. The agent picks the symbols the task needs and reads only those line ranges. The outline's first line names the parser that produced it and the file size before and after, so the reader knows how far to trust it.
+
+There are two parser tiers, because work machines often forbid installing language toolchains or packages with native code. Tier A is a full parser that the environment already has; the tool's environment probe (`kb doctor`) looks for one and never installs anything. Tier B is always available: a small reader built on the standard library for each language family, which understands strings, character literals, and comments, tracks block depth, skips bodies, and joins multi-line signatures. Each source extension maps to a family (brace languages, Python, begin/end keyword languages, SQL, JSON, XML, markup, plain text). An extension with no family becomes an issue; the agent assigns the closest family with `kb config family <ext> <family> --sample <file>`, and the tool refuses the mapping if the sample file gives an empty outline. No size-reduction figures are promised here: the reduction depends on the language and the file, and the tool prints the actual sizes on every run.
 
 Platform libraries follow the evidence rule from knowledge acquisition: inspect or document them only when access exists and license or project rules allow that use. If the likely behavior is hidden behind a restricted source, mark the gap as blocked-by-access or runtime-unverified instead of inventing confidence.
 
@@ -57,7 +68,8 @@ How a task in one module is allowed to reach into another, how the owner is look
    - Prefer usage or module pages for private helpers that express business rules but are not stable APIs.
 
 2. Locate permitted evidence.
-   - Check existing contract pages and usage pages first.
+   - Check existing contract pages and usage pages first; `kb resolve <name>` finds them by name or alias.
+   - Open a source file larger than one read through `kb outline <file>`, then read only the line ranges of the symbols you need.
    - Inspect project libraries and source examples when they are part of the workspace.
    - Inspect platform libraries only when access exists and license or project rules allow that use.
    - Use table pages, module concept pages, user documentation, and runtime observations to interpret behavior.
@@ -106,7 +118,8 @@ How a task in one module is allowed to reach into another, how the owner is look
 
 ## Required Artifacts
 
-- Contract page for the library, class, function, or method.
+- Contract page for the library, class, function, or method, with `Purpose` and `Signature` sections.
+- Family mapping in `.kb/config.json` for every source extension in the evidence folders.
 - Links to permitted source evidence.
 - Links to affected table pages or an explicit note that no persistent table side effects are known.
 - Inputs, outputs, side effects, errors, dependencies, examples, and confidence labels.
@@ -159,6 +172,8 @@ For a non-administrator, `Beta` also locks the filter-form unit field to the own
 
 - Documenting only syntax: the signature is known, but the behavior is still opaque.
 - Copying large code bodies: the contract becomes expensive to read and quickly goes stale.
+- Reading a large file in fragments without its outline: a call is taken for a definition, an overload is missed, or a member is declared absent because it was in an unread part.
+- Installing a parser to read a library on a machine where that is forbidden: the tier-B reader is the permitted path.
 - Omitting side effects: callers miss database writes, status changes, UI calls, or messages.
 - Omitting table links: behavior is disconnected from the data contracts it relies on.
 - Treating private helpers as stable public APIs.

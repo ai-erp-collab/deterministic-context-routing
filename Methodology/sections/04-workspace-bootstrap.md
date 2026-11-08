@@ -25,7 +25,7 @@ The core bootstrap entities are:
 - Project capability profile: a short record of available verification and history tools, such as Git, compiler, automated tests, runtime access, database snapshots, encoding checks, and artifact exporters.
 - Module wiki root: module memory for local concepts, contracts, usage flows, decisions, and open questions.
 - Shared wiki root: shared product memory for reusable platform or cross-module knowledge.
-- Source artifact folders: source evidence areas for raw exports and processed exports.
+- Source artifact folders: source evidence areas with a registry that tracks each export as raw or processed.
 - Design and plan folders: medium memory for task reasoning.
 - Agent instruction file: local rules for an agent. In this workspace the file is `AGENTS.md`; in another agent environment it may be `CLAUDE.md`, `GEMINI.md`, workspace instructions, or another supported rule file.
 
@@ -82,9 +82,9 @@ The bootstrap also implements the context-routing pattern from the knowledge sys
 
 7. Create source artifact folders.
    - Purpose: source evidence.
-   - Put newly found XML, CSV, TXT, or similar exports in `source-artifacts/tables/raw`.
-   - Move recognized exports to `source-artifacts/tables/processed` only after wiki pages are created or refreshed.
-   - Maintain `source-artifacts/INDEX.md` as the artifact ledger.
+   - Register newly found XML, CSV, TXT, or similar exports as copies under `source-artifacts/tables/raw/<module>/` (with `kb ingest` once the integrity layer is installed).
+   - Mark recognized exports `processed` in the registry only after wiki pages are created or refreshed; the files stay where they are.
+   - Keep the evidence registry `source-artifacts/registry.json` as the artifact ledger, with `source-artifacts/INDEX.md` generated from it for agents to read (section 13).
 
 8. Create design and plan folders.
    - Purpose: medium memory for task-specific reasoning.
@@ -123,7 +123,7 @@ The bootstrap also implements the context-routing pattern from the knowledge sys
 - Module `<module>/session_state.md`.
 - Shared wiki root, usually `knowledge-base/shared`.
 - Module wiki root, usually `knowledge-base/modules/<module>` or a module-specific wiki path.
-- Raw and processed artifact folders, usually `source-artifacts/tables/raw` and `source-artifacts/tables/processed`.
+- Source artifact area, usually `source-artifacts/`, with evidence copies under `<kind>/raw/<module>/` and the evidence registry `source-artifacts/registry.json`; `raw` and `processed` are registry statuses, not folders.
 - Artifact index, usually `source-artifacts/INDEX.md`.
 - Design and plan folders.
 - Wiki `INDEX.md` pages and related-notes links.
@@ -150,9 +150,11 @@ Workspace/
       Alpha/
       Beta/
   source-artifacts/
+    registry.json
+    INDEX.md
     tables/
       raw/
-      processed/
+        Alpha/
   Methodology/
     AGENTS.md
     session_state.md

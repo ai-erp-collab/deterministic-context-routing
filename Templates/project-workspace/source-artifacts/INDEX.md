@@ -1,10 +1,11 @@
 # Source Artifacts
 
-Use this index to record raw and processed evidence.
+Evidence copied into the workspace. `kb ingest` copies each file to `<kind>/raw/<module>/` and records its
+origin and hash in `registry.json`; this file is generated from that registry by `tools/kb/kb.py`.
 
-| Artifact | Status | Curated pages | Notes |
-| --- | --- | --- | --- |
-| `<artifact-path>` | raw\|processed | `<wiki-page>` | `<remaining assumptions>` |
+- Do not rewrite raw files unless the project has an explicit normalization rule.
+- A file is processed once a curated page names it in its `source:` line; `kb fix --safe` then sets the
+  status. Files never move between folders, so links to them stay valid.
 
-Move artifacts from raw to processed only after related curated pages are
-created or refreshed.
+| Artifact | Status | Module | Curated pages | Notes |
+| --- | --- | --- | --- | --- |

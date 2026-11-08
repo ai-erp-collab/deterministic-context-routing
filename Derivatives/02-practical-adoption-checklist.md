@@ -8,7 +8,7 @@ Apply the methodology to one module without trying to document the entire system
 
 - [ ] Name the active module.
 - [ ] Confirm its path in `modules.md`.
-- [ ] Confirm wiki, source, and artifact roots.
+- [ ] Confirm wiki, source, evidence, and artifact roots.
 - [ ] Read the module `AGENTS.md`.
 - [ ] Read only the latest module `session_state.md` entry.
 
@@ -21,6 +21,13 @@ Apply the methodology to one module without trying to document the entire system
 - [ ] State required static or guardrail checks.
 - [ ] Keep session-state updates mandatory because they record task intent, evidence, assumptions, verification, and next action.
 
+## 2a. Install The Integrity Layer
+
+- [ ] Install the workspace tool `tools/kb/` (the `context-routing` plugin does it in one step) and confirm Python 3.9 or later is available.
+- [ ] Install the hooks for the agent in use; on Codex, trust the project hooks with `/hooks`.
+- [ ] For a workspace built with an earlier template, run `kb upgrade --dry-run`, review the plan (including legacy link conversions) with the user, then apply it.
+- [ ] Exclude links that point outside the workspace on purpose with a `link_ignore` glob in `.kb/config.json` (matched against the link as written, for example `*other-repo/*`) or `<!-- kb:ignore-link -->` on the line.
+
 ## 3. Write The Module Concept
 
 - [ ] State the module's business purpose.
@@ -32,12 +39,12 @@ Apply the methodology to one module without trying to document the entire system
 
 ## 4. Curate One Evidence Artifact
 
-- [ ] Put new raw exports in the configured raw artifact folder.
+- [ ] Register new exports with `kb ingest` (a hashed copy and a registry row); never copy them by hand.
 - [ ] Identify whether the artifact is a table schema, source example, user document, runtime note, or business rule.
-- [ ] Create or refresh the smallest useful wiki page.
+- [ ] Look for an existing page with `kb resolve` before writing a new one.
+- [ ] Create or refresh the smallest useful wiki page; for a table export use `kb table`.
 - [ ] Add confidence labels to important claims.
-- [ ] Move processed table/source exports only after the wiki page is created or refreshed.
-- [ ] Update the artifact index.
+- [ ] Name the evidence copy in the page's `source:` line so its registry row becomes `processed`; never move evidence files.
 
 ## 5. Run One Workflow-Backed Task
 
@@ -50,6 +57,7 @@ Apply the methodology to one module without trying to document the entire system
 
 ## 6. Record The Result
 
+- [ ] Run `kb check --changed <files>` and resolve or queue what it lists.
 - [ ] Update module `session_state.md`.
 - [ ] Update root `session_state.md` as a compact module activity index.
 - [ ] Add durable discoveries to the module wiki or shared wiki.
@@ -59,4 +67,5 @@ Apply the methodology to one module without trying to document the entire system
 
 - The next agent can identify the module, task state, evidence used, verification performed, and remaining assumptions without reading chat history.
 - At least one curated page or durable note exists because of the task.
+- `kb check` reports no blocking issues; open issues are numbered in `docs/checks/OPEN.md`.
 - The method has been proven on one narrow slice before wider rollout.
