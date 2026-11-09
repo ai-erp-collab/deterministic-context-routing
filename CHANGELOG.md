@@ -43,6 +43,7 @@ occur before `1.0.0`.
   in the value case and in the adoption steps.
 - `README.md`: the degradation problem, the integrity layer, and the
   plugin (0.2.1 or later) as the fastest start.
+- Ukrainian translation of all the above under `uk/`.
 
 ### Changed
 
