@@ -28,6 +28,33 @@ class KbError(Exception):
     """Usage or environment error: message is shown, exit code 2."""
 
 
+# Machine-local files the tool writes; everything else under .kb/ (config, profiles,
+# track.ignore, issues.json, manifest.json, state.json) is shared project state.
+DATA_GITIGNORE = (
+    "# Written by kb. Machine-local data: backups, undo journal, upgrade log, rebuilt index.\n"
+    "# Commit the rest of .kb/ (config, profiles, issue ids, shipped-file manifest).\n"
+    "backups/\n"
+    "journal/\n"
+    "upgrade-log.jsonl\n"
+    "entities.json\n"
+)
+
+CHECKS_GITIGNORE = (
+    "# Written by kb. Dated check reports stay local; OPEN.md is the shared current state.\n"
+    "*-check.md\n"
+    "*-check-*.md\n"
+)
+
+
+def ensure_dir(folder: Path, gitignore: str) -> Path:
+    """Create folder; write its .gitignore once (a project-edited one is never replaced)."""
+    folder.mkdir(parents=True, exist_ok=True)
+    ignore = folder / ".gitignore"
+    if not ignore.exists():
+        ignore.write_bytes(gitignore.encode("utf-8"))
+    return folder
+
+
 class NoWorkspace(KbError):
     """No workspace (AGENTS.md + modules.md) at the given or detected root."""
 
@@ -183,12 +210,16 @@ class Workspace:
                 pass
         return {}
 
+    def make_data_dir(self) -> Path:
+        """.kb/, created with its .gitignore."""
+        return ensure_dir(self.data_dir, DATA_GITIGNORE)
+
     def write_state(self, state: dict) -> None:
-        self.data_dir.mkdir(parents=True, exist_ok=True)
+        self.make_data_dir()
         (self.data_dir / "state.json").write_bytes((json.dumps(state, indent=1, ensure_ascii=False) + "\n").encode("utf-8"))
 
     def save_config(self) -> None:
-        self.data_dir.mkdir(parents=True, exist_ok=True)
+        self.make_data_dir()
         (self.data_dir / "config.json").write_bytes(
             (json.dumps(self.config, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
         )

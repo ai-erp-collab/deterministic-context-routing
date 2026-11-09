@@ -157,7 +157,10 @@ def _fix_run(ws: Workspace, args) -> int:
     if args.dry_run:
         print("kb fix: %d edits would be made (dry run, nothing written)" % len(journal.edits))
     else:
-        print("kb fix: %d fixes applied, %d edits, run_id: %s" % (applied, len(journal.edits), run_id))
+        n_edits = len(journal.edits)
+        print("kb fix: %d fix%s applied, %d file edit%s%s, run_id: %s" % (
+            applied, "" if applied == 1 else "es", n_edits, "" if n_edits == 1 else "s",
+            " (the files already held the fixed text)" if applied and not n_edits else "", run_id))
     for edit in journal.edits:
         print("%s: %s -> %s" % edit)
     if args.ids:
@@ -549,6 +552,7 @@ def _table_learn(ws: Workspace, a) -> int:
         print("kb table learn: nothing saved: %s" % err)
         return 1
     folder = ws.data_dir / "profiles"
+    ws.make_data_dir()
     folder.mkdir(parents=True, exist_ok=True)
     (folder / (a.name + ".json")).write_bytes((json.dumps(prof, indent=1, ensure_ascii=False) + "\n").encode("utf-8"))
     print("kb table learn: profile `%s` saved, %d field%s parsed (first 10 below; show them to the user)"

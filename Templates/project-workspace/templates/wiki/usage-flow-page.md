@@ -4,7 +4,7 @@ source: <example or module path>
 contracts: [<contract>](../contracts/<contract>.md)
 tables: [<table>](../tables/<table>.md)
 status: confirmed|partial|uncertain
-confidence: confirmed|inferred|runtime-unverified|blocked-by-access
+confidence: confirmed|schema-confirmed|runtime-confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Flow
 

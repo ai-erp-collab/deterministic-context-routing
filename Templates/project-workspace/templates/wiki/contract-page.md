@@ -4,7 +4,7 @@ kind: class|function
 source: <code library path>
 aliases: <search terms>
 status: confirmed|partial|uncertain
-confidence: confirmed|inferred|runtime-unverified|blocked-by-access
+confidence: confirmed|schema-confirmed|runtime-confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Purpose
 

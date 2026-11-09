@@ -7,6 +7,25 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.7.1-draft] - 2026-11-09
+
+### Fixed
+
+- Confidence labels agree across the methodology and the starter kit.
+  Section 06 already defines `schema-confirmed` and `runtime-confirmed` as
+  evidence-layer forms of `confirmed`; section 12 and every
+  `Templates/project-workspace/templates/` page and session template now
+  say so, so a generated table page (`confidence: schema-confirmed`) no
+  longer contradicts its own template.
+- `Templates/project-workspace/tools/kb/`: a check no longer leaves the
+  git tree dirty (`.gitignore` files for dated reports and machine-local
+  `.kb/` data), YAML front matter is not read as links, and the upgrade
+  and fix summaries say what actually changed. Same changes as plugin
+  0.2.2.
+- `uk/README.md` caught up with the English README: status badge, the
+  knowledge-base degradation problem, the integrity layer, and the plugin
+  Quickstart.
+
 ## [0.7.0-draft] - 2026-11-08
 
 ### Added

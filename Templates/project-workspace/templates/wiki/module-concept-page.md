@@ -3,7 +3,7 @@
 kind: module-concept
 status: partial
 aliases: <business names and abbreviations>
-confidence: confirmed|inferred|runtime-unverified|blocked-by-access
+confidence: confirmed|schema-confirmed|runtime-confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Purpose
 

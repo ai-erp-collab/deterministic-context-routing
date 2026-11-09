@@ -208,8 +208,12 @@ def plan_upgrade(ws, src: Path, answers: Optional[dict] = None) -> UpgradePlan:
 
 
 def format_plan(plan: UpgradePlan, applying: bool) -> List[str]:
-    head = "kb upgrade: version %d -> %d from %s (%s)" % (
-        plan.version, CURRENT_VERSION, plan.src.as_posix(), "applying" if applying else "plan only; nothing written")
+    if plan.version == CURRENT_VERSION:
+        what = "shipped files changed, workspace format %d unchanged" % plan.version
+    else:
+        what = "workspace format %d -> %d" % (plan.version, CURRENT_VERSION)
+    head = "kb upgrade: %s, from %s (%s)" % (
+        what, plan.src.as_posix(), "applying" if applying else "plan only; nothing written")
     lines = [head]
     for label, items in (("add", plan.add), ("replace", plan.replace),
                          ("conflict (project edits kept; <file>.new written beside them)", plan.conflict)):
@@ -269,7 +273,7 @@ def read_log(ws) -> List[dict]:
 
 
 def _log(ws, upgrade_id: str, step: str, run: Optional[str] = None, **extra) -> None:
-    ws.data_dir.mkdir(parents=True, exist_ok=True)
+    ws.make_data_dir()
     rec = {"upgrade": upgrade_id, "step": step, "run": run,
            "time": datetime.datetime.now().isoformat(timespec="seconds")}
     rec.update(extra)
@@ -311,6 +315,7 @@ def format_counts(label: str, c: dict) -> str:
 
 def _snapshot(ws) -> str:
     backups = ws.data_dir / "backups"
+    ws.make_data_dir()
     backups.mkdir(parents=True, exist_ok=True)
     base = "%s-pre-upgrade" % datetime.date.today().isoformat()
     path = backups / (base + ".zip")
@@ -423,7 +428,7 @@ def apply_upgrade(ws, plan: UpgradePlan, answers: dict, emit: Callable[[str], No
     def do_snapshot():
         path = _snapshot(ws)
         _log(ws, upgrade_id, "snapshot", None, snapshot=path)
-        emit("snapshot: %s" % path)
+        emit("snapshot: %s (knowledge base, rules files, .kb data; other file edits are in the undo journal)" % path)
         done["snapshot"] = {"snapshot": path}
 
     if "snapshot" not in done:
@@ -487,7 +492,7 @@ def apply_upgrade(ws, plan: UpgradePlan, answers: dict, emit: Callable[[str], No
                 old = _read_json(ws.data_dir / "manifest.json", ".kb/manifest.json")
                 old.update(manifest)
                 manifest = old
-            ws.data_dir.mkdir(parents=True, exist_ok=True)
+            ws.make_data_dir()
             (ws.data_dir / "manifest.json").write_bytes(
                 (json.dumps(manifest, indent=1, sort_keys=True) + "\n").encode("utf-8"))
 

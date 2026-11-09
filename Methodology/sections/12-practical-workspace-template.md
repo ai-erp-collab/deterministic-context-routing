@@ -27,7 +27,7 @@ A useful starter workspace has six jobs:
 - memory: preserve compact restart context and durable knowledge;
 - evidence: keep every source artifact copied, registered, and auditable;
 - integrity: keep links, indexes, and the evidence registry true without relying on the agent's memory (the deterministic integrity layer from section 03);
-- confidence: label important claims as confirmed, inferred, runtime-unverified, or blocked-by-access;
+- confidence: label important claims as confirmed, inferred, runtime-unverified, or blocked-by-access, where confirmed may name its evidence layer as schema-confirmed or runtime-confirmed (section 06);
 - workflow integration: give Superpowers or an equivalent workflow enough project context to plan, implement, verify, and update documentation.
 
 ## Starter Structure
@@ -228,7 +228,7 @@ At minimum, create templates for:
 - session-state entry;
 - cross-module session-state entry, left in an owner module when another module changes it.
 
-Wiki and contract templates should separate page status from claim confidence. `status` says whether the page is complete enough for use. `confidence` says how a specific fact is supported: `confirmed`, `inferred`, `runtime-unverified`, or `blocked-by-access`.
+Wiki and contract templates should separate page status from claim confidence. `status` says whether the page is complete enough for use. `confidence` says how a specific fact is supported: `confirmed`, `inferred`, `runtime-unverified`, or `blocked-by-access`. `confirmed` may carry its evidence layer, `schema-confirmed` or `runtime-confirmed`; a table page generated from an export starts as `schema-confirmed`, and the template's `confidence:` line lists all six values so an agent never "corrects" a valid label.
 
 Project and module `idea.md` files are recommended bootstrap inputs, especially for new workspaces. They are not recurring operational artifacts, and mature modules may not need retroactive idea files if their intent is already captured in durable wiki pages and plans.
 

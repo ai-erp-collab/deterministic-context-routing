@@ -212,7 +212,7 @@ def _maps(pages: Dict[str, dict]) -> Tuple[Dict[str, List[str]], Dict[str, List[
 def build_index(ws, changed: Optional[Set[str]] = None) -> dict:
     """Write .kb/entities.json. Full rebuild, or only the changed pages when given."""
     index = compute_index(ws, changed)
-    ws.data_dir.mkdir(parents=True, exist_ok=True)
+    ws.make_data_dir()
     (ws.data_dir / INDEX_FILE).write_bytes((json.dumps(index, ensure_ascii=False) + "\n").encode("utf-8"))
     return index
 

@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import List, Optional, Set
 
 from .journal import read_text_file, write_text_preserving
+from .workspace import CHECKS_GITIGNORE, ensure_dir
 
 
 @dataclass
@@ -69,7 +70,7 @@ def load_state(ws) -> dict:
 
 
 def save_state(ws, state: dict) -> None:
-    ws.data_dir.mkdir(parents=True, exist_ok=True)
+    ws.make_data_dir()
     write_lf(ws.data_dir / "issues.json", json.dumps(state, indent=1, ensure_ascii=False) + "\n")
 
 
@@ -91,7 +92,7 @@ def write_reports(ws, issues: List[Issue], today: str) -> Path:
     state = load_state(ws)
     prev = {row["key"]: row for row in state["open"]}
     checks_dir = ws.root / "docs" / "checks"
-    checks_dir.mkdir(parents=True, exist_ok=True)
+    ensure_dir(checks_dir, CHECKS_GITIGNORE)
     report = _report_path(checks_dir, today)
     rows = []
     seen = set()

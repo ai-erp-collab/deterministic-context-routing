@@ -53,10 +53,24 @@ def _iter_lines(text: str):
         offset += len(line)
 
 
+def _frontmatter_end(text: str) -> int:
+    """Line number of the closing marker of a YAML front matter block, or 0 when there is none.
+    The block opens with `---` on line 1 and closes with `---` or `...`."""
+    lines = text.splitlines()
+    if not lines or lines[0].lstrip("﻿").rstrip() != "---":
+        return 0
+    for no, line in enumerate(lines[1:], start=2):
+        if line.rstrip() in ("---", "..."):
+            return no
+    return 0
+
+
 def extract_links(text: str) -> List[Link]:
+    """Links in the page body; YAML front matter is metadata, not links."""
     links: List[Link] = []
+    front = _frontmatter_end(text)
     for no, off, body, in_fence in _iter_lines(text):
-        if in_fence:
+        if in_fence or no <= front:
             continue
         taken = [False] * len(body)
 

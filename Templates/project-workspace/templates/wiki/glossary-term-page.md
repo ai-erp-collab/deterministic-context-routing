@@ -5,7 +5,7 @@ term: <term>
 aliases: <abbreviations, transliterations, other spellings>
 domain: <domain>
 owner: <module>
-confidence: confirmed|inferred|runtime-unverified|blocked-by-access
+confidence: confirmed|schema-confirmed|runtime-confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Meaning
 

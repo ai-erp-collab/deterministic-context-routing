@@ -4,7 +4,7 @@ kind: table
 source: <artifact path>
 aliases: <business names>
 status: confirmed|partial|uncertain
-confidence: confirmed|inferred|runtime-unverified|blocked-by-access
+confidence: confirmed|schema-confirmed|runtime-confirmed|inferred|runtime-unverified|blocked-by-access
 
 ## Purpose
 

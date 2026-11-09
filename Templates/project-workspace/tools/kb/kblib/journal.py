@@ -175,6 +175,7 @@ class Journal:
                       "deleted": True, "before_b64": base64.b64encode(before).decode("ascii")})
 
     def _append(self, record: dict) -> None:
+        self.ws.make_data_dir()
         self.journal_dir.mkdir(parents=True, exist_ok=True)
         now = datetime.datetime.now()
         rec = {"run": self.run_id, "time": now.isoformat(timespec="seconds"), "command": self.command}
