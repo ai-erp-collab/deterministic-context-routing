@@ -26,14 +26,15 @@ from .migrations import Question, all_migrations
 from .migrations.m001_initial import LEGACY_READMES, UNIMPORTED, legacy_baseline
 from .workspace import CURRENT_VERSION, KbError, Workspace
 
-SHIPPED_PREFIXES = ("tools/kb/", "skills/kb/", ".codex/skills/kb/", "templates/")
+SHIPPED_PREFIXES = ("tools/kb/", ".agents/skills/kb/", "templates/")
+LEGACY_SKILL_DIRS = ("skills/kb", ".codex/skills/kb")
 HOOKS_JSON = ".codex/hooks.json"
 BLOCK_BEGIN = "<!-- kb:begin -->"
 BLOCK_END = "<!-- kb:end -->"
 BLOCK_ASSET = "tools/kb/assets/agents-block.md"
 RULE_FILES = ("AGENTS.md", "CLAUDE.md")
 SNAPSHOT_ROOTS = ("knowledge-base", "modules.md", "source-artifacts/INDEX.md", "source-artifacts/registry.json",
-                  "AGENTS.md", "CLAUDE.md", "skills", ".codex", ".kb") + LEGACY_READMES
+                  "AGENTS.md", "CLAUDE.md", ".agents", "skills", ".codex", ".kb") + LEGACY_READMES
 KB_KEEP = ("backups/", "journal/", "upgrade-log.jsonl")
 MAX_SNAPSHOT_BYTES = 5 * 1024 * 1024
 LOG = "upgrade-log.jsonl"
@@ -562,10 +563,10 @@ def rollback(ws, emit: Callable[[str], None]) -> int:
 
 def check_pending(ws, scope: Scope) -> List[Issue]:
     out = []
-    for root in ("tools/kb", "skills/kb", "templates", ".codex"):
+    for root in ("tools/kb", ".agents/skills/kb", "templates", ".codex"):
         for rel in iter_files(ws, root, ".new"):
-            if not scope.includes(rel):
-                continue
+            if rel.startswith(".codex/skills/") or not scope.includes(rel):
+                continue  # legacy skill folders are reported below
             target = rel[:-4]
             out.append(Issue(16, rel, "pending merge", "minor", "",
                              "`%s` holds the new shipped version of `%s`, which the project edited" % (rel, target),
@@ -577,6 +578,16 @@ def check_pending(ws, scope: Scope) -> List[Issue]:
                              "from raw to processed, but files never move now" % rel,
                              "move its project-specific rules into AGENTS.md `## Project-Specific Rules` "
                              "(drop any wording about moving files; status is a registry field), then delete it"))
+    for base in LEGACY_SKILL_DIRS + ("skills/cross-module-owner-api",):
+        for rel in iter_files(ws, base, None):
+            if not scope.includes(rel):
+                continue
+            target = ".agents/" + rel[rel.index("skills/"):]
+            if target.endswith(".new"):
+                target = target[:-4]
+            out.append(Issue(16, rel, "legacy skill copy", "minor", "",
+                             "`%s` is an old skill copy; skills now live in `.agents/skills/`" % rel,
+                             "merge the wanted changes into `%s`, then delete `%s`" % (target, rel)))
     if (ws.root / UNIMPORTED).is_file() and scope.includes(UNIMPORTED):
         out.append(Issue(16, UNIMPORTED, "unimported rows", "minor", "",
                          "old ledger rows could not be imported into the registry (see `%s`)" % UNIMPORTED,

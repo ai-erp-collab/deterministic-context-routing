@@ -8,10 +8,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-CURRENT_VERSION = 1
+CURRENT_VERSION = 2
 
 DEFAULT_CONFIG = {
-    "workspace_version": 1,
+    "workspace_version": CURRENT_VERSION,
     "cooldown_sessions": 3,
     "outline_threshold_kb": 50,
     "resolve_min_score": 0.75,
@@ -150,6 +150,8 @@ def load_config(data_dir: Path) -> dict:
         if not isinstance(data, dict):
             raise KbError("%s must hold a JSON object" % path)
         _deep_merge(cfg, data)
+        if "workspace_version" not in data:
+            cfg["workspace_version"] = 1  # configs written before format 2 may lack the key
     return cfg
 
 

@@ -68,7 +68,7 @@ an earlier template. Copy this template's `tools/kb/` into it, then:
 3. Verify the copy contains: `AGENTS.md`, `idea.md`, `known_issues.md`,
    `modules.md`, `session_state.md`, `knowledge-base/`,
    `source-artifacts/`, `modules/example-module/`, `templates/`,
-   `skills/`, `tools/kb/kb.py`, `.codex/hooks.json`.
+   `.agents/skills/`, `tools/kb/kb.py`, `.codex/hooks.json`.
 4. Check that `python --version` (or `python3 --version`, or
    `py -3 --version`) reports 3.9 or later. If not, **ASK** the user whether to continue without the
    integrity tool: the workspace still works, but no checks run.
@@ -101,13 +101,14 @@ runs under the workspace's own rules.
    loads do not exist for the agent — in particular the
    knowledge-access rules, which every question-answering session
    depends on.
-6. Install the skills from `skills/` where the target platform loads
-   skills (for example `.claude/skills/` or `.codex/skills/`); if the
+6. The skills live in `.agents/skills/`, which Codex, Cursor, OpenCode,
+   Antigravity and Hermes read as project skills (Hermes after
+   `hermes skills trust`). Claude Code users get them from the
+   `context-routing` plugin or copy them to `.claude/skills/`. If the
    platform has no skill mechanism, keep the folder and make sure the
    rules file points to the skill file by path. Verify that a fresh
    session can name the `cross-module-owner-api` skill when asked
-   whether another module already has some rule. On Codex the `kb`
-   skill is already in `.codex/skills/kb/`.
+   whether another module already has some rule.
 7. Run `python tools/kb/kb.py upgrade --yes` (it writes `.kb/` and the
    managed block of the rules file), then `python tools/kb/kb.py doctor`.
    On Codex, tell the user to trust the project hooks with `/hooks`.

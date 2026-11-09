@@ -31,7 +31,7 @@ values. Keep project-specific rules in clearly marked sections.
 - `templates/wiki/`: module concept, table, contract, usage-flow, and glossary-term page templates.
 - `templates/workflow/`: design and implementation-plan templates.
 - `templates/session/`: session-state entry templates, including the cross-module entry left in an owner module.
-- `skills/`: platform-neutral agent skills; `cross-module-owner-api` handles work that reaches from the active module into another module; `kb` resolves what the integrity tool reports and holds its procedures. Install them where your agent platform loads skills (a Codex copy of `kb` ships in `.codex/skills/kb/`).
+- `.agents/skills/`: platform-neutral agent skills; `cross-module-owner-api` handles work that reaches from the active module into another module; `kb` resolves what the integrity tool reports and holds its procedures. Codex, Cursor, OpenCode, Antigravity and Hermes read `.agents/skills/` as project skills; Claude Code users get them from the `context-routing` plugin or copy them to `.claude/skills/`.
 
 ## Adapting the Template
 

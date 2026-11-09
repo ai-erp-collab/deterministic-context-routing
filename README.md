@@ -1,7 +1,7 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.7.1-draft](https://img.shields.io/badge/status-v0.7.1--draft-orange)
+![Status: v0.7.2-draft](https://img.shields.io/badge/status-v0.7.2--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 🇬🇧 English (this page) | [🇺🇦 Українська](uk/README.md)
@@ -146,17 +146,29 @@ not because the method only works there.
 
 ## Quickstart
 
-**Fastest start:** install the free MIT plugin for Claude Code
-([deterministic-context-routing-plugin](https://github.com/ai-erp-collab/deterministic-context-routing-plugin)):
+**Fastest start:** install the free MIT plugin
+([deterministic-context-routing-plugin](https://github.com/ai-erp-collab/deterministic-context-routing-plugin)),
+or simply tell your agent: *Install the plugin from
+https://github.com/ai-erp-collab/deterministic-context-routing-plugin
+following its INSTALL.md.*
 
-```text
-/plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin
-/plugin install context-routing@deterministic-context-routing
-```
+| Agent | Install |
+|---|---|
+| Claude Code | `/plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin`, then `/plugin install context-routing@deterministic-context-routing` |
+| Codex | `codex plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin`, then install from `/plugins` |
+| Cursor | Customize -> From GitHub Repository -> repository URL |
+| OpenCode | `opencode.json` plugin entry `context-routing@git+https://github.com/ai-erp-collab/deterministic-context-routing-plugin.git` |
+| Antigravity | `agy plugin install https://github.com/ai-erp-collab/deterministic-context-routing-plugin` |
+| Hermes | `hermes plugins install ai-erp-collab/deterministic-context-routing-plugin --enable` |
 
-The plugin (0.2.1 or later) sets up the workspace, installs the integrity
-tool and its hooks, and upgrades a workspace built with an earlier
-template: it previews every change, snapshots first, and can roll back.
+The [plugin README](https://github.com/ai-erp-collab/deterministic-context-routing-plugin#install)
+says what each agent gets (Claude Code and Codex run the checks from
+hooks; the others run them by hand). The plugin (0.3.0 or later) sets up
+the workspace, installs the integrity tool, and upgrades a workspace built
+with an earlier template: it previews every change, snapshots first, and
+can roll back. The workspace itself is agent-neutral; the same workspace
+was validated under a second agent framework
+([Evidence/01](Evidence/01-hermes-agent-cross-framework-validation.md)).
 
 Or set the workspace up by hand:
 

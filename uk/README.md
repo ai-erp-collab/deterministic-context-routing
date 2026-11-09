@@ -1,7 +1,7 @@
 # Deterministic Context Routing™
 
 ![License: BSL 1.1](https://img.shields.io/badge/license-BSL%201.1-blue)
-![Status: v0.7.1-draft](https://img.shields.io/badge/status-v0.7.1--draft-orange)
+![Status: v0.7.2-draft](https://img.shields.io/badge/status-v0.7.2--draft-orange)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
 [🇬🇧 English](../README.md) | 🇺🇦 Українська (ця сторінка)
@@ -151,18 +151,29 @@ Deterministic Context Routing — не суто про ERP: це відпові�
 
 ## Швидкий старт
 
-**Найшвидший старт:** встановіть безкоштовний MIT-плагін для Claude Code
-([deterministic-context-routing-plugin](https://github.com/ai-erp-collab/deterministic-context-routing-plugin)):
+**Найшвидший старт:** встановіть безкоштовний MIT-плагін
+([deterministic-context-routing-plugin](https://github.com/ai-erp-collab/deterministic-context-routing-plugin))
+або просто скажіть своєму агенту: *Install the plugin from
+https://github.com/ai-erp-collab/deterministic-context-routing-plugin
+following its INSTALL.md.*
 
-```text
-/plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin
-/plugin install context-routing@deterministic-context-routing
-```
+| Агент | Встановлення |
+|---|---|
+| Claude Code | `/plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin`, потім `/plugin install context-routing@deterministic-context-routing` |
+| Codex | `codex plugin marketplace add ai-erp-collab/deterministic-context-routing-plugin`, потім встановіть із `/plugins` |
+| Cursor | Customize -> From GitHub Repository -> URL репозиторію |
+| OpenCode | запис плагіна в `opencode.json`: `context-routing@git+https://github.com/ai-erp-collab/deterministic-context-routing-plugin.git` |
+| Antigravity | `agy plugin install https://github.com/ai-erp-collab/deterministic-context-routing-plugin` |
+| Hermes | `hermes plugins install ai-erp-collab/deterministic-context-routing-plugin --enable` |
 
-Плагін (0.2.1 або новіший) налаштовує workspace, встановлює інструмент
-цілісності та його хуки й оновлює workspace, збудований за ранішим
-шаблоном: показує кожну зміну наперед, спершу робить знімок і вміє
-відкотитися.
+[README плагіна](https://github.com/ai-erp-collab/deterministic-context-routing-plugin#install)
+пояснює, що отримує кожен агент (Claude Code і Codex запускають перевірки
+з хуків; інші — вручну). Плагін (0.3.0 або новіший) налаштовує workspace,
+встановлює інструмент цілісності й оновлює workspace, збудований за
+ранішим шаблоном: показує кожну зміну наперед, спершу робить знімок і
+вміє відкотитися. Сам workspace не прив'язаний до агента; той самий
+workspace перевірено під іншим агентним фреймворком
+([Evidence/01](../Evidence/01-hermes-agent-cross-framework-validation.md)).
 
 Або налаштуйте workspace вручну:
 

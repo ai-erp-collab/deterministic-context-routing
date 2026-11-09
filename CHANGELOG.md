@@ -7,6 +7,19 @@ Versioning uses a draft `0.x` scheme until the methodology stabilizes;
 backward-incompatible section renumbering or structural changes may still
 occur before `1.0.0`.
 
+## [0.7.2-draft] - 2026-11-09
+
+### Changed
+
+- `Templates/project-workspace/`: the skills moved from `skills/` and
+  `.codex/skills/kb/` to `.agents/skills/`, which Codex, Cursor, OpenCode,
+  Antigravity, and Hermes read as project skills (workspace format 2;
+  `kb upgrade` migrates existing workspaces and keeps edited copies for a
+  manual merge). Sections 12 and 14 (and their `uk/` mirrors) describe the
+  new layout, which agents get hooks, and the manual check for the rest.
+  Same changes as plugin 0.3.0, which also adds Codex, Cursor,
+  Antigravity, and OpenCode packaging.
+
 ## [0.7.1-draft] - 2026-11-09
 
 ### Fixed

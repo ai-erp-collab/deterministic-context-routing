@@ -58,17 +58,17 @@ workspace/
     registry.json  # evidence registry: the source of truth (written by the tool)
     INDEX.md       # generated from registry.json for agents to read
     <kind>/raw/<module>/   # evidence copies; files never move after intake
-  skills/
-    cross-module-owner-api/
-      SKILL.md
-    kb/
-      SKILL.md     # the one KB skill; hook messages point here
+  .agents/
+    skills/        # read as project skills by Codex, Cursor, OpenCode, Antigravity, Hermes
+      cross-module-owner-api/
+        SKILL.md
+      kb/
+        SKILL.md   # the one KB skill; hook messages point here
   tools/
     kb/            # integrity tool code: replaced on upgrade, never holds project data
   .kb/             # integrity tool data: config, layout profiles, journal, lookup index
   .codex/
     hooks.json     # Codex hooks (Claude Code gets its hooks from the plugin)
-    skills/kb/     # Codex copy of the kb skill
   modules/
     <module>/
       AGENTS.md
@@ -131,7 +131,7 @@ The integrity layer adds two more lines, kept inside a managed block that its up
 ```markdown
 <!-- kb:begin -->
 - Read source files larger than 50 KB through `python tools/kb/kb.py outline <file>`, not directly.
-- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`skills/kb/SKILL.md`).
+- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`.agents/skills/kb/SKILL.md`).
 <!-- kb:end -->
 ```
 
@@ -236,7 +236,7 @@ This project stores the copyable project-workspace templates in `Methodology/Tem
 
 This project also ships a copyable project workspace package in `Methodology/Templates/project-workspace/`. It contains root and module `idea.md` files, root starter files, one example module, knowledge roots, source artifact folders, workflow folders, and reusable page templates grouped into `wiki`, `workflow`, and `session` template folders. Treat it as a starting point to adapt, not as a finished project configuration.
 
-The package also carries the integrity tool (`tools/kb/`), Codex hooks (`.codex/hooks.json`), and a `skills/` folder with two skills. The `kb` skill is where hook messages send the agent: it routes from a situation (an issue to resolve, a large file, new evidence, a table export, an unknown term, a recipe candidate, an upgrade) to one short reference file. The `cross-module-owner-api` skill runs the cross-module procedure from `10-agentic-workflow-with-superpowers.md`: question or command mode, the fixed lookup order, the owner API, the link left in the consumer, and the mark left in the owner. The folder is platform-neutral; during assembly the skill is installed wherever the target agent platform loads skills, or referenced by path from the rules file when the platform has no skill mechanism.
+The package also carries the integrity tool (`tools/kb/`), Codex hooks (`.codex/hooks.json`), and a `.agents/skills/` folder with two skills. The `kb` skill is where hook messages send the agent: it routes from a situation (an issue to resolve, a large file, new evidence, a table export, an unknown term, a recipe candidate, an upgrade) to one short reference file. The `cross-module-owner-api` skill runs the cross-module procedure from `10-agentic-workflow-with-superpowers.md`: question or command mode, the fixed lookup order, the owner API, the link left in the consumer, and the mark left in the owner. The folder is platform-neutral, and its location is the one most agents already read: Codex, Cursor, OpenCode, Antigravity, and Hermes load `.agents/skills/` as project skills (Hermes after the user trusts them). Claude Code gets the same skills from the `context-routing` plugin or from a copy in `.claude/skills/`. On a platform with no skill mechanism, the rules file references the skill by path.
 
 The root of `Methodology/Templates/` is reserved for templates used to produce this methodology itself, such as `section-contract.md` and `section-dod.md`. Those are product-specific templates for writing this book from section files. They are not required for every ERP project unless that project also produces assembled documentation from source sections.
 
@@ -283,7 +283,7 @@ Do this by hand using the steps below, or hand `Templates/project-workspace/ASSE
 7. Add starter templates.
    - Create module concept, table, contract, usage flow, design, plan, and session-state templates, including the cross-module session-state entry.
    - Keep templates short enough to be reused, not polished into prose essays.
-   - Add the `cross-module-owner-api` skill and install it where the agent platform loads skills.
+   - Add the `cross-module-owner-api` skill under `.agents/skills/`; on Claude Code, use the plugin or copy it to `.claude/skills/`.
 
 8. Add the evidence registry and the integrity layer.
    - Add an `evidence:` field for each module in `modules.md`.

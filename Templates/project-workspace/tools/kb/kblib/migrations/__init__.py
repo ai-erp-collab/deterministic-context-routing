@@ -18,5 +18,5 @@ class Question:
 
 
 def all_migrations():
-    from . import m001_initial
-    return [m001_initial]
+    from . import m001_initial, m002_agents_skills
+    return [m001_initial, m002_agents_skills]

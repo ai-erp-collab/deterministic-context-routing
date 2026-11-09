@@ -39,7 +39,7 @@ The checks run on three events, with no agent memory involved:
 - At the end of a turn, the hook checks the files changed in the session. If they introduced a blocking issue, it stops the turn once with the issue lines; it never stops the same turn twice, so it cannot trap the agent in a loop.
 - At session start, the hook prints one line when issues are open or when the workspace is older than the installed tool.
 
-Hook messages name the `kb` skill, so the agent is pulled into the right procedure by the event, not by remembering a rule. Each agent platform wires hooks differently. Claude Code receives them from the `context-routing` plugin; in a folder without the tool they do nothing, except that a workspace built with an earlier template gets a one-line hint to upgrade. Codex reads them from the workspace file `.codex/hooks.json`; project hooks run only after the user trusts them with `/hooks`, so the setup step asks the user to do that. Every hook looks for Python 3.9 or later under the usual command names and exits silently when none is found, so a machine without a usable interpreter loses the checks but never breaks the agent.
+Hook messages name the `kb` skill, so the agent is pulled into the right procedure by the event, not by remembering a rule. Each agent platform wires hooks differently. Claude Code receives them from the `context-routing` plugin; in a folder without the tool they do nothing, except that a workspace built with an earlier template gets a one-line hint to upgrade. Codex reads them from the workspace file `.codex/hooks.json`; project hooks run only after the user trusts them with `/hooks`, so the setup step asks the user to do that. Cursor, OpenCode, Antigravity, and Hermes get no hooks from this package; there the checks run by hand through the fallback below. Every hook looks for Python 3.9 or later under the usual command names and exits silently when none is found, so a machine without a usable interpreter loses the checks but never breaks the agent.
 
 Hooks may be unavailable: a platform without hook support, a policy that blocks them, or a session started in a subfolder. The fallback is the two lines in the managed block of `AGENTS.md` (outline large files; run `kb check --changed` before closing a session) and the session-closing step, which runs the same check and records its result in `session_state.md`. The fallback costs a little attention; the hooks cost none.
 
@@ -69,7 +69,7 @@ Workspaces built with an earlier template must reach the current one without los
 2. Snapshot. The upgrade zips the knowledge base, the module registry, the evidence registry and index, the rules files, skills, and hooks into `.kb/backups/` before it changes anything. Large evidence copies are listed rather than zipped. This is the rollback point when the project has no version control.
 3. Shipped files. A manifest records the hash of every file the template installed. A file that is absent is added; a file unchanged since installation is replaced; a file the project edited is kept, and the new version is written beside it as `<file>.new` with an issue to merge it. A project edit is never overwritten.
 4. Managed blocks. Rules files receive the tool's lines between `<!-- kb:begin -->` and `<!-- kb:end -->`; later upgrades replace only that block. Hook files are merged by entry, keeping the project's own hooks.
-5. Data migrations. Numbered, idempotent steps convert older data: evidence folders added to `modules.md` after the user confirms them, the old artifact index imported into the registry, legacy links converted as previewed, `.kb/` defaults written, and the lookup index built. Running a migration twice changes nothing.
+5. Data migrations. Numbered, idempotent steps convert older data: evidence folders added to `modules.md` after the user confirms them, the old artifact index imported into the registry, legacy links converted as previewed, `.kb/` defaults written, the lookup index built, and old skill copies in `skills/` and `.codex/skills/` moved to `.agents/skills/` (copies the project edited are kept and reported for a manual merge). Running a migration twice changes nothing.
 6. Verify. A full check runs, and the upgrade reports before-and-after counts (valid links, duplicate groups, untracked evidence, open issues).
 
 Each step is recorded in an upgrade log in `.kb/`, so an interrupted upgrade continues where it stopped; the agent also writes a `session_state.md` entry with the reported counts. `kb upgrade --rollback` restores the snapshot and reverses the upgrade's journaled edits. If any file changed after the upgrade, it refuses, lists those files, and changes nothing, so later curation is never lost. A later template version adds a migration and raises the workspace version; the same command then upgrades across several versions in order.
@@ -79,7 +79,7 @@ Each step is recorded in an upgrade log in `.kb/`, so an interrupted upgrade con
 1. Create the starter workspace.
    - Add root instructions, root idea, known issues, module registry, root session state, docs folders, knowledge roots, source artifact roots, and one module folder.
    - Copy only the universal parts of the instruction templates.
-   - Install the integrity layer: the plugin does it in one step; with the template, copy `tools/kb/`, the `kb` skill, and `.codex/hooks.json`, run `python tools/kb/kb.py upgrade --yes` once, then `python tools/kb/kb.py doctor`. On Codex, ask the user to trust the project hooks with `/hooks`.
+   - Install the integrity layer: the plugin does it in one step; with the template, copy `tools/kb/`, the `.agents/skills/` folder, and `.codex/hooks.json`, run `python tools/kb/kb.py upgrade --yes` once, then `python tools/kb/kb.py doctor`. On Codex, ask the user to trust the project hooks with `/hooks`.
    - If the target already is a workspace (it has `AGENTS.md` and `modules.md`), upgrade it instead: preview with `kb upgrade --dry-run`, get the user's approval, then apply.
 
 2. Write the project idea.
@@ -181,7 +181,8 @@ Every shipped template should be explained by the guide:
 - `project-workspace/templates/session/session-state-entry.md`: covered as compact restart context.
 - `project-workspace/templates/wiki/glossary-term-page.md`: covered by shared terms in module language.
 - `project-workspace/tools/kb/`: covered by the integrity layer in the knowledge system, the workspace template, and this section.
-- `project-workspace/skills/kb/` and its `.codex/skills/kb/` copy: covered as the one skill hook messages point to.
+- `project-workspace/.agents/skills/kb/`: covered as the one skill hook messages point to.
+- `project-workspace/.agents/skills/`: covered as the skill folder most agent platforms read as project skills.
 - `project-workspace/.codex/hooks.json`: covered by hooks per agent in this section.
 - `section-contract.md`: project-specific to this Methodology module's section-writing workflow.
 - `section-dod.md`: project-specific to this Methodology module's section quality gate.
@@ -276,7 +277,7 @@ For an existing workspace with a hand-kept wiki, the same project starts differe
 - Skipping runtime-assumption records because static checks passed.
 - Using the hard-case workflow in a project that has Git, compiler/build checks, tests, or runtime access.
 - Treating commit history as a substitute for session state.
-- Installing the tool without its hooks, or leaving Codex hooks untrusted: the checks exist but never run.
+- Installing the tool without its hooks, leaving Codex hooks untrusted, or skipping the manual check on an agent without hooks: the checks exist but never run.
 - Running the first fix on an existing wiki without a preview: hundreds of links change before anyone has seen the plan.
 - Overwriting shipped files the project edited during an upgrade: project rules disappear silently.
 - Hand-editing inside the managed block: the next upgrade replaces it.

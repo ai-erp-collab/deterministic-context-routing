@@ -11,7 +11,7 @@
 - Keep module-specific durable knowledge in `knowledge-base/modules/<module>`.
 - Keep reusable platform or cross-module knowledge in `knowledge-base/shared`.
 - Keep raw source artifacts separate from curated knowledge.
-- Work in one active module. Reach into another module only when the user asks about it (read only) or commands a change there; then follow the `cross-module-owner-api` skill (`skills/cross-module-owner-api/SKILL.md`).
+- Work in one active module. Reach into another module only when the user asks about it (read only) or commands a change there; then follow the `cross-module-owner-api` skill (`.agents/skills/cross-module-owner-api/SKILL.md`).
 - Never copy another module's rule into the active module; call its owner API. Every write into another module leaves a mark in that module (contract page change history and a cross-module `session_state.md` entry).
 - Update the active module `session_state.md` after every non-conversational task.
 - Update root `session_state.md` only as a compact module activity index.
@@ -19,7 +19,7 @@
 - Keep `session_state.md` even when Git exists; Git records file history, while session state records task intent, evidence, assumptions, verification, and next action.
 <!-- kb:begin -->
 - Read source files larger than 50 KB through `python tools/kb/kb.py outline <file>`, not directly.
-- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`skills/kb/SKILL.md`).
+- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`.agents/skills/kb/SKILL.md`).
 <!-- kb:end -->
 
 ## Project-Specific Rules

@@ -110,6 +110,14 @@ class Journal:
             return None
         return read_text_file(p)
 
+    def _new_dirs(self, relpath: str) -> List[str]:
+        """Folders that writing relpath will create, deepest first (undo removes them again)."""
+        out, d = [], (self.ws.root / relpath).parent
+        while d != self.ws.root and not d.exists():
+            out.append(d.relative_to(self.ws.root).as_posix())
+            d = d.parent
+        return out
+
     def exists(self, relpath: str) -> bool:
         return self._state(relpath) is not None
 
@@ -133,9 +141,13 @@ class Journal:
         if self.dry_run:
             return
         path = self.ws.root / relpath
+        made = self._new_dirs(relpath)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(encode_text(after, bom, False))  # newlines already settled by _splice
-        self._append({"file": relpath, "rule": rule, "before": before, "after": after, "bom": bom})
+        rec = {"file": relpath, "rule": rule, "before": before, "after": after, "bom": bom}
+        if made:
+            rec["made_dirs"] = made
+        self._append(rec)
 
     def copy_file(self, src: Path, relpath: str, rule: str, overwrite: bool = False) -> None:
         """Copy a (possibly binary) file into the workspace; journaled by hash.
@@ -151,10 +163,13 @@ class Journal:
         self.overlay[relpath] = ("", False, False)
         if self.dry_run:
             return
+        made = self._new_dirs(relpath)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(data)
         rec = {"file": relpath, "rule": rule, "before": None, "after": None, "binary": True,
                "sha256": hashlib.sha256(data).hexdigest()}
+        if made:
+            rec["made_dirs"] = made
         if before is not None:
             rec["before_b64"] = base64.b64encode(before).decode("ascii")
         self._append(rec)
@@ -241,6 +256,8 @@ class Journal:
         for f in reversed(list(first.keys())):
             rec = first[f]
             p = self.ws.root / f
+            if rec.get("before") is not None or rec.get("before_b64") is not None:
+                p.parent.mkdir(parents=True, exist_ok=True)  # a later step may have removed the folder
             if rec.get("before_b64") is not None:
                 p.write_bytes(base64.b64decode(rec["before_b64"]))
             elif rec["before"] is None:
@@ -254,4 +271,10 @@ class Journal:
                 self._append({"file": f, "rule": "undo", "before": last[f]["after"], "after": rec["before"],
                               "bom": rec.get("bom", False)})
             restored.append(f)
+        made = {d for rec in recs for d in rec.get("made_dirs", [])}
+        for d in sorted(made, key=lambda d: d.count("/"), reverse=True):  # deepest first
+            try:
+                (self.ws.root / d).rmdir()  # only succeeds while empty
+            except OSError:
+                pass
         return restored

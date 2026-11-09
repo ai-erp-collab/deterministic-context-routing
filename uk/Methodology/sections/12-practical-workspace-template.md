@@ -58,17 +58,17 @@ workspace/
     registry.json  # evidence registry: the source of truth (written by the tool)
     INDEX.md       # generated from registry.json for agents to read
     <kind>/raw/<module>/   # evidence copies; files never move after intake
-  skills/
-    cross-module-owner-api/
-      SKILL.md
-    kb/
-      SKILL.md     # the one KB skill; hook messages point here
+  .agents/
+    skills/        # read as project skills by Codex, Cursor, OpenCode, Antigravity, Hermes
+      cross-module-owner-api/
+        SKILL.md
+      kb/
+        SKILL.md   # the one KB skill; hook messages point here
   tools/
     kb/            # integrity tool code: replaced on upgrade, never holds project data
   .kb/             # integrity tool data: config, layout profiles, journal, lookup index
   .codex/
     hooks.json     # Codex hooks (Claude Code gets its hooks from the plugin)
-    skills/kb/     # Codex copy of the kb skill
   modules/
     <module>/
       AGENTS.md
@@ -131,7 +131,7 @@ Methodology/
 ```markdown
 <!-- kb:begin -->
 - Read source files larger than 50 KB through `python tools/kb/kb.py outline <file>`, not directly.
-- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`skills/kb/SKILL.md`).
+- Before closing a session, run `python tools/kb/kb.py check --changed <files you changed>` and resolve what it lists with the `kb` skill (`.agents/skills/kb/SKILL.md`).
 <!-- kb:end -->
 ```
 
@@ -236,7 +236,7 @@ Methodology/
 
 Цей проєкт також постачає копійований пакет project workspace у `Methodology/Templates/project-workspace/`. Він містить кореневі та модульні файли `idea.md`, кореневі стартові файли, один приклад модуля, корені знань, папки вихідних артефактів, папки робочого процесу та багаторазові шаблони сторінок, згруповані в папки шаблонів `wiki`, `workflow` і `session`. Розглядайте це як стартову точку для адаптації, а не як завершену конфігурацію проєкту.
 
-Пакет також містить інструмент цілісності (`tools/kb/`), хуки Codex (`.codex/hooks.json`) і папку `skills/` з двома скилами. Скил `kb` — це місце, куди хук-повідомлення скеровують агента: він маршрутизує від ситуації (проблема для розв'язання, великий файл, нові свідчення, експорт таблиці, невідомий термін, кандидат у рецепти, оновлення) до одного короткого довідкового файлу. Скил `cross-module-owner-api` виконує міжмодульну процедуру з `10-agentic-workflow-with-superpowers.md`: режим питання чи команди, фіксований порядок пошуку, owner API, посилання, що залишається у споживачі, і позначку, що залишається у власнику. Папка не прив'язана до платформи; під час складання скил встановлюють туди, звідки цільова агентна платформа завантажує скили, або, якщо платформа не має механізму скилів, на нього посилаються за шляхом із файлу правил.
+Пакет також містить інструмент цілісності (`tools/kb/`), хуки Codex (`.codex/hooks.json`) і папку `.agents/skills/` з двома скилами. Скил `kb` — це місце, куди хук-повідомлення скеровують агента: він маршрутизує від ситуації (проблема для розв'язання, великий файл, нові свідчення, експорт таблиці, невідомий термін, кандидат у рецепти, оновлення) до одного короткого довідкового файлу. Скил `cross-module-owner-api` виконує міжмодульну процедуру з `10-agentic-workflow-with-superpowers.md`: режим питання чи команди, фіксований порядок пошуку, owner API, посилання, що залишається у споживачі, і позначку, що залишається у власнику. Папка не прив'язана до платформи, а її розташування — те, яке більшість агентів уже читає: Codex, Cursor, OpenCode, Antigravity і Hermes завантажують `.agents/skills/` як скили проєкту (Hermes — після того, як користувач їм довірить). Claude Code отримує ті самі скили від плагіна `context-routing` або з копії в `.claude/skills/`. На платформі без механізму скилів файл правил посилається на скил за шляхом.
 
 Корінь `Methodology/Templates/` зарезервований для шаблонів, що використовуються для виробництва самої цієї методології, таких як `section-contract.md` і `section-dod.md`. Це специфічні для продукту шаблони для написання цієї книги з файлів розділів. Вони не потрібні кожному ERP-проєкту, якщо тільки цей проєкт також не виробляє зібрану документацію з вихідних розділів.
 
@@ -283,7 +283,7 @@ Methodology/
 7. Додайте стартові шаблони.
    - Створіть шаблони концепції модуля, таблиці, контракту, сценарію використання, дизайну, плану та стану сесії, зокрема міжмодульного запису стану сесії.
    - Тримайте шаблони достатньо короткими для повторного використання, не відшліфовуйте їх до прозових есе.
-   - Додайте скил `cross-module-owner-api` і встановіть його туди, звідки агентна платформа завантажує скили.
+   - Додайте скил `cross-module-owner-api` у `.agents/skills/`; у Claude Code скористайтеся плагіном або скопіюйте його в `.claude/skills/`.
 
 8. Додайте реєстр свідчень і шар цілісності.
    - Додайте поле `evidence:` для кожного модуля в `modules.md`.
